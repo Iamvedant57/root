@@ -1,0 +1,32 @@
+[
+  {
+    "appointment_id": "apt_1787133757829_n15il3",
+    "customer_name": "Jane Doe",
+    "customer_phone": "9890640303",
+    "service": "Haircut & Styling",
+    "appointment_date": "2026-08-25",
+    "appointment_time": "02:00 PM",
+    "status": "pending",
+    "created_at": "2026-08-19T10:02:37.829Z"
+  },
+  {
+    "appointment_id": "apt_1787134687888_1q0sik",
+    "customer_name": "ve",
+    "customer_phone": "8756284738",
+    "service": "Hydra-Facial Ritual",
+    "appointment_date": "83239-06-06",
+    "appointment_time": "12:00 PM",
+    "status": "pending",
+    "created_at": "2026-08-19T10:18:07.888Z"
+  },
+  {
+    "appointment_id": "apt_1787134819423_u4lpzr",
+    "customer_name": "veda",
+    "customer_phone": "7676767676",
+    "service": "Beard Styling & Shave",
+    "appointment_date": "8888-08-08",
+    "appointment_time": "05:00 PM",
+    "status": "pending",
+    "created_at": "2026-08-19T10:20:19.423Z"
+  }
+]

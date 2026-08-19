@@ -1,0 +1,1712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<title>Roots Magma Unisex Salon — Est. 1985 in Amravati</title>
+<meta name="description" content="Roots Magma Unisex Salon is Amravati's premier salon established in 1985. Located at Camp Road, opposite Hotel Great Mehfil, Next Level Mall, Ground Floor Shop No. 5. Haircuts, beard styling, hair spa, hydra facials, keratin, and bridal/groom makeup. Contact us today.">
+<meta name="keywords" content="Roots Magma Unisex Salon, Roots Magma Salon Amravati, roots_magma, unisex salon Amravati, Next Level Mall salon, haircut Amravati, hydra facial Amravati, bridal makeup Amravati, groom makeup">
+<meta name="theme-color" content="#0b0b0c">
+
+<!-- Open Graph -->
+<meta property="og:title" content="Roots Magma Unisex Salon — Est. 1985">
+<meta property="og:description" content="39+ years of craft &amp; modern luxury. Visit Roots Magma Unisex Salon at Next Level Mall, Camp Road, Amravati.">
+<meta property="og:type" content="website">
+
+<!-- Favicon -->
+<link rel="icon" href="logo-icon.png" type="image/png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+<style>
+/* =========================================================
+   TOKENS — edit these to re-theme the entire site
+   ========================================================= */
+:root{
+  --black:#0b0b0c;
+  --charcoal:#17161a;
+  --charcoal-2:#201e22;
+  --ivory:#f8f5ef;
+  --white:#ffffff;
+  --gold:#c6a15b;
+  --gold-light:#e8d2a0;
+  --gold-deep:#8a6d3a;
+  --muted:#b9b2a5;
+  --muted-dark:#6f6a63;
+  --line: rgba(198,161,91,0.25);
+
+  --font-display:'Cormorant Garamond', Georgia, serif;
+  --font-body:'Jost', 'Segoe UI', sans-serif;
+
+  --container: 1200px;
+  --radius: 4px;
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+*,*::before,*::after{ box-sizing:border-box; }
+html{ scroll-behavior:smooth; -webkit-tap-highlight-color: transparent; }
+@media (prefers-reduced-motion: reduce){
+  html{ scroll-behavior:auto; }
+  *,*::before,*::after{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+}
+body{
+  margin:0;
+  background:var(--black);
+  color:var(--ivory);
+  font-family:var(--font-body);
+  font-weight:300;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
+  width: 100%;
+}
+img{ max-width:100%; height:auto; display:block; }
+a{ color:inherit; text-decoration:none; }
+ul{ list-style:none; margin:0; padding:0; }
+button, input, select, textarea{ font-family:inherit; }
+button{ cursor:pointer; }
+h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; margin:0; color:var(--white); }
+.container{ max-width:var(--container); margin:0 auto; padding:0 24px; width:100%; }
+
+/* ---------- Reveal-on-scroll ---------- */
+.reveal{ opacity:0; transform:translateY(28px); transition:opacity .9s var(--ease), transform .9s var(--ease); }
+.reveal.is-visible{ opacity:1; transform:translateY(0); }
+
+/* ---------- Eyebrow / section labels ---------- */
+.eyebrow{
+  display:inline-flex; align-items:center; gap:12px;
+  font-family:var(--font-body); font-size:12px; letter-spacing:4px; text-transform:uppercase;
+  color:var(--gold); margin-bottom:18px; font-weight: 500;
+}
+.eyebrow::before{ content:''; width:28px; height:1px; background:var(--gold); display:inline-block; }
+
+.section{ padding:110px 0; position:relative; overflow:hidden; }
+.section-title{ font-size:clamp(32px, 4.5vw, 52px); line-height:1.15; margin-bottom:18px; letter-spacing:-0.5px; }
+.section-sub{ color:var(--muted); max-width:560px; font-size:17px; margin-top:0; }
+.section-head{ margin-bottom:56px; }
+.section-head.center{ text-align:center; margin-left:auto; margin-right:auto; }
+.section-head.center .section-sub{ margin-left:auto; margin-right:auto; }
+.section-head.center .eyebrow::before{ display:none; }
+
+/* =========================================================
+   SIGNATURE ELEMENT: gold thread divider
+   ========================================================= */
+.gold-thread{ position:relative; height:1px; width:100%; background:var(--line); overflow:hidden; margin: 0 auto; }
+.gold-thread::after{
+  content:''; position:absolute; inset:0; width:0%;
+  background:linear-gradient(90deg, transparent, var(--gold), transparent);
+  transition:width 1.4s var(--ease);
+}
+.gold-thread.is-visible::after{ width:100%; }
+
+/* =========================================================
+   HEADER & LOGO BRANDING
+   ========================================================= */
+.site-header{
+  position:fixed; top:0; left:0; right:0; z-index:1000;
+  padding:16px 0; transition:background .4s var(--ease), padding .4s var(--ease), border-color .4s var(--ease);
+  border-bottom:1px solid transparent;
+}
+.site-header.scrolled{ background:rgba(11,11,12,0.95); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); padding:10px 0; border-color:var(--line); }
+.site-header .container{ display:flex; align-items:center; justify-content:space-between; }
+
+.logo-brand{ display:flex; align-items:center; gap:14px; text-decoration:none; }
+.logo-mark-svg{
+  position:relative; width:56px; height:56px; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  transition:transform .3s var(--ease);
+}
+.logo-mark-svg svg{ width:100%; height:100%; animation:spin 30s linear infinite; }
+.logo-mark-center{ position:absolute; font-family:var(--font-display); font-size:16px; font-weight:700; color:var(--gold); }
+.logo-brand:hover .logo-mark-svg{ transform:scale(1.08); }
+
+.logo-text-group{ display:flex; flex-direction:column; justify-content:center; }
+.logo-title{ font-family:var(--font-display); font-size:21px; color:var(--white); letter-spacing:0.5px; line-height:1.1; white-space:nowrap; }
+.logo-title strong{ color:var(--gold); font-weight:700; }
+.logo-subtitle{ font-family:var(--font-display); font-style:italic; font-size:13px; color:var(--gold); letter-spacing:1px; margin-top:2px; font-weight:400; white-space:nowrap; }
+
+.btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  padding:14px 30px; font-size:13px; letter-spacing:2px; text-transform:uppercase; font-weight:500;
+  border:1px solid var(--gold); border-radius:var(--radius); background:transparent; color:var(--gold);
+  transition:background .4s var(--ease), color .4s var(--ease), transform .3s var(--ease), box-shadow .4s var(--ease);
+  white-space:nowrap; cursor:pointer; text-align:center;
+}
+.btn:hover{ background:var(--gold); color:var(--black); transform:translateY(-2px); box-shadow:0 10px 30px -8px rgba(198,161,91,0.6); }
+.btn-solid{ background:var(--gold); color:var(--black); }
+.btn-solid:hover{ background:var(--gold-light); }
+
+/* =========================================================
+   CUSTOM SUPER-ANIMATED LINES TO CROSS TOGGLE BUTTON
+   ========================================================= */
+.nav-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  width: 48px;
+  height: 48px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 6px 4px;
+  gap: 8px;
+  position: relative;
+  z-index: 1100;
+}
+
+.hamburger-line {
+  height: 2px;
+  background-color: var(--gold);
+  border-radius: 2px;
+  transition: transform 0.45s cubic-bezier(0.68, -0.6, 0.32, 1.6), width 0.35s var(--ease), background-color 0.3s var(--ease);
+  transform-origin: center;
+}
+
+/* Line 1 (top): Longer line */
+.hamburger-line.line-1 {
+  width: 34px;
+}
+
+/* Line 2 (bottom): Shorter line offset right */
+.hamburger-line.line-2 {
+  width: 24px;
+  margin-left: auto;
+}
+
+/* Hover effect */
+.nav-toggle:hover .hamburger-line {
+  background-color: var(--gold-light);
+}
+.nav-toggle:hover .hamburger-line.line-2 {
+  width: 34px;
+}
+
+/* OPEN STATE: Super smooth spring animation into Cross (X) */
+.nav-toggle.open .hamburger-line.line-1 {
+  width: 30px;
+  transform: translateY(5px) rotate(45deg);
+  background-color: var(--gold-light);
+}
+
+.nav-toggle.open .hamburger-line.line-2 {
+  width: 30px;
+  transform: translateY(-5px) rotate(-45deg);
+  background-color: var(--gold-light);
+}
+
+/* =========================================================
+   SUPER ANIMATED FULLSCREEN MENU OVERLAY
+   ========================================================= */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 11, 12, 0.96);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease);
+  padding: 40px 24px;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 22px;
+  text-align: center;
+}
+
+.menu-nav-link {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 4.8vw, 52px);
+  color: var(--ivory);
+  text-decoration: none;
+  font-weight: 500;
+  letter-spacing: 2px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.45s var(--ease), transform 0.45s var(--ease), color 0.3s var(--ease), text-shadow 0.3s var(--ease);
+}
+
+.menu-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  background: var(--gold);
+  transition: width 0.35s var(--ease), left 0.35s var(--ease);
+}
+
+.menu-nav-link:hover {
+  color: var(--white);
+  text-shadow: 0 0 20px rgba(198, 161, 91, 0.6);
+  transform: scale(1.05) translateY(0) !important;
+}
+
+.menu-nav-link:hover::after {
+  width: 100%;
+  left: 0;
+}
+
+/* Staggered entrance animation when menu opens */
+.menu-overlay.open .menu-nav-link {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.menu-overlay.open .menu-nav-link:nth-child(1) { transition-delay: 0.10s; }
+.menu-overlay.open .menu-nav-link:nth-child(2) { transition-delay: 0.16s; }
+.menu-overlay.open .menu-nav-link:nth-child(3) { transition-delay: 0.22s; }
+.menu-overlay.open .menu-nav-link:nth-child(4) { transition-delay: 0.28s; }
+.menu-overlay.open .menu-nav-link:nth-child(5) { transition-delay: 0.34s; }
+.menu-overlay.open .menu-nav-link:nth-child(6) { transition-delay: 0.40s; }
+
+.menu-footer-note {
+  margin-top: 40px;
+  font-size: 13px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.45s var(--ease) 0.48s, transform 0.45s var(--ease) 0.48s;
+}
+
+.menu-overlay.open .menu-footer-note {
+  opacity: 0.8;
+  transform: translateY(0);
+}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{
+  position:relative; min-height:100vh; min-height:100dvh; display:flex; align-items:center;
+  padding:120px 0 80px;
+  background:
+    linear-gradient(180deg, rgba(11,11,12,0.65) 0%, rgba(11,11,12,0.85) 60%, var(--black) 100%),
+    url('https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+}
+.hero::before{
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 20% 20%, rgba(198,161,91,0.12), transparent 60%);
+  pointer-events:none;
+}
+.hero-content{ position:relative; z-index:2; max-width:740px; }
+.hero .eyebrow{ opacity:0; animation:fadeUp .9s var(--ease) .2s forwards; }
+.hero h1{ font-size:clamp(40px, 7vw, 76px); line-height:1.08; opacity:0; animation:fadeUp .9s var(--ease) .4s forwards; }
+.hero h1 em{ font-style:italic; color:var(--gold); font-weight:400; }
+.hero p{ margin-top:22px; color:var(--muted); font-size:clamp(16px, 2vw, 19px); max-width:560px; opacity:0; animation:fadeUp .9s var(--ease) .6s forwards; line-height:1.7; }
+.hero-actions{ margin-top:40px; display:flex; gap:18px; flex-wrap:wrap; opacity:0; animation:fadeUp .9s var(--ease) .8s forwards; align-items:center; }
+
+@keyframes fadeUp{ from{ opacity:0; transform:translateY(24px); } to{ opacity:1; transform:translateY(0); } }
+
+/* Emblem Badge in Hero */
+.seal{
+  position:absolute; right:6%; bottom:10%; width:195px; height:195px; z-index:2;
+  display:flex; align-items:center; justify-content:center; pointer-events:none;
+}
+.seal svg{
+  width:100%; height:100%; animation:spin 30s linear infinite; transform-origin:center;
+}
+.seal-center{
+  position:absolute; font-family:var(--font-display); font-size:38px; font-weight:700;
+  color:var(--gold); letter-spacing:1px;
+}
+@keyframes spin{ to{ transform:rotate(360deg); } }
+
+.scroll-cue{ position:absolute; left:50%; bottom:30px; transform:translateX(-50%); z-index:2; color:var(--muted); font-size:11px; letter-spacing:3px; text-transform:uppercase; display:flex; flex-direction:column; align-items:center; gap:10px; }
+.scroll-cue span{ width:1px; height:36px; background:linear-gradient(var(--gold), transparent); animation:pulse 2s ease-in-out infinite; }
+@keyframes pulse{ 0%,100%{ opacity:.3; } 50%{ opacity:1; } }
+
+/* =========================================================
+   ABOUT
+   ========================================================= */
+.about-grid{ display:grid; grid-template-columns:0.95fr 1.05fr; gap:70px; align-items:center; }
+.about-media{ position:relative; }
+.about-media img{ width:100%; border-radius:var(--radius); filter:grayscale(15%); object-fit:cover; aspect-ratio:4/3; }
+.about-media .frame{ position:absolute; top:-16px; left:-16px; right:16px; bottom:16px; border:1px solid var(--gold); z-index:-1; border-radius:var(--radius); }
+.about-stats{ display:flex; gap:36px; margin-top:36px; flex-wrap:wrap; }
+.stat b{ display:block; font-family:var(--font-display); font-size:38px; color:var(--gold); line-height:1; }
+.stat span{ font-size:12px; letter-spacing:2px; text-transform:uppercase; color:var(--muted); margin-top:4px; display:block; }
+.about-copy p{ color:var(--muted); font-size:16px; margin-bottom:18px; line-height:1.7; }
+.about-list{ margin-top:26px; display:grid; gap:14px; }
+.about-list li{ display:flex; gap:14px; align-items:flex-start; color:var(--ivory); font-size:15px; }
+.about-list i{ color:var(--gold); margin-top:4px; flex-shrink:0; }
+
+/* =========================================================
+   SERVICES
+   ========================================================= */
+.services-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:2px; background:var(--line); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; }
+.service-card{
+  background:var(--charcoal); padding:42px 30px; transition:background .4s var(--ease), transform .4s var(--ease);
+  position:relative; overflow:hidden; display:flex; flex-direction:column; justify-content:flex-start;
+}
+.service-card::before{ content:''; position:absolute; inset:0; background:linear-gradient(160deg, rgba(198,161,91,0.1), transparent 60%); opacity:0; transition:opacity .4s var(--ease); }
+.service-card:hover::before{ opacity:1; }
+.service-card:hover{ background:var(--charcoal-2); }
+.service-icon{ width:54px; height:54px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:20px; margin-bottom:24px; transition:transform .4s var(--ease), background .4s var(--ease); flex-shrink:0; background:rgba(198,161,91,0.04); }
+.service-card:hover .service-icon{ transform:rotate(-8deg) scale(1.08); background:rgba(198,161,91,0.15); }
+.service-card h3{ font-size:22px; margin-bottom:10px; }
+.service-card p{ color:var(--muted); font-size:14px; margin:0; line-height:1.65; }
+
+/* =========================================================
+   PRICING
+   ========================================================= */
+.pricing-tabs{ display:flex; justify-content:center; gap:12px; margin-bottom:50px; flex-wrap:wrap; }
+.pricing-tab{ padding:11px 24px; border:1px solid var(--line); border-radius:30px; font-size:13px; letter-spacing:1.5px; text-transform:uppercase; color:var(--muted); transition:all .3s var(--ease); background:transparent; font-weight:500; }
+.pricing-tab.active, .pricing-tab:hover{ border-color:var(--gold); color:var(--black); background:var(--gold); }
+
+.pricing-table{ display:none; opacity:0; transition:opacity .4s var(--ease); }
+.pricing-table.active{ display:grid; grid-template-columns:1fr 1fr; gap:0 60px; opacity:1; }
+.price-row{ display:flex; justify-content:space-between; align-items:center; padding:18px 0; border-bottom:1px dashed var(--line); gap:16px; }
+.price-row .name{ font-family:var(--font-display); font-size:20px; color:var(--white); flex-grow:1; }
+.price-row .name small{ display:block; font-family:var(--font-body); color:var(--muted); font-size:13px; margin-top:2px; letter-spacing:.5px; font-weight:300; }
+.price-row .amount{ font-family:var(--font-display); font-size:22px; color:var(--gold); white-space:nowrap; font-weight:600; text-align:right; }
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+.gallery-grid{ display:grid; grid-template-columns:repeat(4,1fr); grid-auto-rows:200px; gap:12px; }
+.gallery-item{ position:relative; overflow:hidden; cursor:pointer; border-radius:var(--radius); }
+.gallery-item:nth-child(1){ grid-row:span 2; }
+.gallery-item:nth-child(4){ grid-row:span 2; }
+.gallery-item img{ width:100%; height:100%; object-fit:cover; transition:transform .6s var(--ease); }
+.gallery-item:hover img{ transform:scale(1.08); }
+.gallery-item::after{ content:'\f065'; font-family:'Font Awesome 6 Free'; font-weight:900; position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:24px; background:rgba(11,11,12,0.0); opacity:0; transition:all .4s var(--ease); }
+.gallery-item:hover::after{ opacity:1; background:rgba(11,11,12,0.5); }
+
+.lightbox{ position:fixed; inset:0; background:rgba(6,6,7,0.95); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); z-index:2000; display:none; align-items:center; justify-content:center; padding:24px; }
+.lightbox.open{ display:flex; }
+.lightbox img{ max-width:90vw; max-height:85vh; border:1px solid var(--line); border-radius:var(--radius); box-shadow:0 20px 50px rgba(0,0,0,0.8); }
+.lightbox-close{ position:absolute; top:24px; right:28px; color:var(--gold); font-size:32px; background:none; border:none; padding:8px; cursor:pointer; transition:transform .3s var(--ease); }
+.lightbox-close:hover{ transform:scale(1.15); }
+
+/* =========================================================
+   REVIEWS
+   ========================================================= */
+.reviews-track-wrap{ overflow:hidden; width:100%; position:relative; touch-action: pan-y; }
+.reviews-track{ display:flex; gap:28px; transition:transform .6s var(--ease); width:100%; }
+.review-card{ flex:0 0 calc(33.333% - 19px); background:var(--charcoal); padding:36px; border:1px solid var(--line); border-radius:var(--radius); display:flex; flex-direction:column; justify-content:space-between; }
+.review-stars{ color:var(--gold); font-size:14px; margin-bottom:18px; letter-spacing:3px; }
+.review-card p{ color:var(--ivory); font-size:15px; font-style:italic; margin-bottom:26px; line-height:1.65; flex-grow:1; margin-top:0; }
+.review-person{ display:flex; align-items:center; gap:14px; }
+.review-person img{ width:48px; height:48px; border-radius:50%; object-fit:cover; border:1px solid var(--line); flex-shrink:0; }
+.review-person b{ display:block; color:var(--white); font-size:15px; font-weight:500; }
+.review-person span{ font-size:12px; color:var(--muted); }
+.reviews-nav{ display:flex; gap:14px; justify-content:center; margin-top:40px; }
+.reviews-nav button{ width:44px; height:44px; border-radius:50%; border:1px solid var(--gold); background:transparent; color:var(--gold); transition:all .3s var(--ease); display:flex; align-items:center; justify-content:center; font-size:16px; cursor:pointer; }
+.reviews-nav button:hover{ background:var(--gold); color:var(--black); transform:scale(1.05); }
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+.contact-grid{ display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:stretch; }
+.contact-list{ display:grid; gap:28px; }
+.contact-item{ display:flex; gap:20px; align-items:flex-start; }
+.contact-item .ico{ width:48px; height:48px; border:1px solid var(--gold); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--gold); font-size:18px; flex-shrink:0; background:rgba(198,161,91,0.04); }
+.contact-item h4{ font-size:16px; margin-bottom:4px; color:var(--white); font-family:var(--font-body); font-weight:500; letter-spacing:.5px; }
+.contact-item p, .contact-item a{ color:var(--muted); font-size:14.5px; margin:0; line-height:1.6; }
+.contact-item a:hover{ color:var(--gold); }
+.hours-table{ margin-top:10px; width:100%; border-collapse:collapse; }
+.hours-table td{ padding:10px 0; border-bottom:1px dashed var(--line); font-size:14px; color:var(--muted); }
+.hours-table td:last-child{ text-align:right; color:var(--ivory); font-weight:400; }
+.map-wrap{ height:100%; min-height:420px; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); }
+.map-frame{ border:none; filter:grayscale(35%) invert(90%) contrast(90%); width:100%; height:100%; min-height:420px; display:block; }
+
+/* =========================================================
+   FAQ
+   ========================================================= */
+.faq-list{ max-width:840px; margin:0 auto; }
+.faq-item{ border-bottom:1px solid var(--line); transition:border-color .3s var(--ease); }
+.faq-q{ display:flex; justify-content:space-between; align-items:center; padding:26px 0; font-family:var(--font-display); font-size:21px; color:var(--white); cursor:pointer; user-select:none; gap:16px; }
+.faq-q i{ color:var(--gold); transition:transform .35s var(--ease); font-size:16px; flex-shrink:0; }
+.faq-item.open .faq-q i{ transform:rotate(45deg); }
+.faq-a{ max-height:0; overflow:hidden; transition:max-height .45s var(--ease); }
+.faq-a p{ color:var(--muted); padding-bottom:26px; font-size:15px; max-width:740px; margin:0; line-height:1.7; }
+
+/* =========================================================
+   CTA STRIP
+   ========================================================= */
+.cta-strip{ background:linear-gradient(120deg, var(--gold-deep), var(--gold) 50%, var(--gold-deep)); color:var(--black); text-align:center; padding:70px 0; }
+.cta-strip h2{ color:var(--black); font-size:clamp(28px,4.5vw,44px); letter-spacing:-0.5px; }
+.cta-strip p{ color:rgba(11,11,12,0.85); margin:14px 0 30px; font-size:17px; max-width:600px; margin-left:auto; margin-right:auto; }
+.cta-strip .btn{ border-color:var(--black); color:var(--black); font-weight:600; }
+.cta-strip .btn:hover{ background:var(--black); color:var(--gold); border-color:var(--black); }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer{ padding:80px 0 30px; background:var(--black); border-top:1px solid var(--line); }
+.footer-grid{ display:grid; grid-template-columns:1.4fr 1fr 1fr 1.2fr; gap:50px; margin-bottom:60px; }
+.footer-about p{ color:var(--muted); font-size:14px; margin:20px 0 24px; line-height:1.6; }
+.social-row{ display:flex; gap:12px; }
+.social-row a{ width:40px; height:40px; border:1px solid var(--line); border-radius:50%; display:flex; align-items:center; justify-content:center; color:var(--gold); transition:all .3s var(--ease); font-size:15px; }
+.social-row a:hover{ background:var(--gold); color:var(--black); border-color:var(--gold); transform:translateY(-2px); }
+.footer-col h4{ font-size:13px; letter-spacing:2px; text-transform:uppercase; color:var(--white); margin-bottom:22px; font-weight:600; }
+.footer-col ul li{ margin-bottom:12px; }
+.footer-col ul a{ color:var(--muted); font-size:14px; transition:color .3s var(--ease); }
+.footer-col ul a:hover{ color:var(--gold); }
+.footer-bottom{ display:flex; justify-content:space-between; align-items:center; padding-top:30px; border-top:1px solid var(--line); font-size:13px; color:var(--muted-dark); flex-wrap:wrap; gap:14px; }
+.footer-bottom a{ color:var(--muted-dark); transition:color .3s var(--ease); }
+.footer-bottom a:hover{ color:var(--gold); }
+
+/* Floating WhatsApp button */
+.whatsapp-float{
+  position:fixed; bottom:26px; right:26px; z-index:990;
+  width:58px; height:58px; border-radius:50%; background:#25D366; color:#fff;
+  display:flex; align-items:center; justify-content:center; font-size:28px;
+  box-shadow:0 10px 30px -6px rgba(0,0,0,0.6); transition:transform .3s var(--ease), box-shadow .3s var(--ease);
+}
+.whatsapp-float:hover{ transform:scale(1.1); box-shadow:0 12px 36px -4px rgba(37,211,102,0.6); }
+
+/* =========================================================
+   RESPONSIVE COMPATIBILITY & ALIGNMENT
+   ========================================================= */
+@media (max-width: 1080px){
+  .services-grid{ grid-template-columns:repeat(2,1fr); }
+  .gallery-grid{ grid-template-columns:repeat(3,1fr); grid-auto-rows:180px; }
+  .gallery-item:nth-child(1), .gallery-item:nth-child(4){ grid-row:span 1; }
+  .review-card{ flex:0 0 calc(50% - 14px); }
+  .footer-grid{ grid-template-columns:1fr 1fr; gap:40px; }
+}
+
+@media (max-width: 880px){
+  .section{ padding:80px 0; }
+  .site-header{ padding:16px 0; }
+  .site-header.scrolled{ padding:12px 0; }
+
+  .hero{ padding:130px 0 80px; text-align:left; }
+  .hero-actions{ flex-direction:column; align-items:stretch; }
+  .hero-actions .btn{ width:100%; }
+  .seal{ width:140px; height:140px; right:4%; bottom:6%; }
+
+  .about-grid{ grid-template-columns:1fr; gap:50px; }
+  .about-media{ order:2; max-width:550px; margin:0 auto; width:100%; }
+  .about-copy{ order:1; }
+
+  .contact-grid{ grid-template-columns:1fr; gap:50px; }
+  .map-wrap, .map-frame{ min-height:350px; }
+  .pricing-table.active{ grid-template-columns:1fr; gap:0; }
+}
+
+@media (max-width: 640px){
+  .container{ padding:0 18px; }
+  .section{ padding:64px 0; }
+  .section-head{ margin-bottom:40px; }
+  .eyebrow{ font-size:11px; letter-spacing:3px; }
+
+  .logo-mark-svg{ width:44px; height:44px; }
+  .logo-title{ font-size:17px; }
+  .logo-subtitle{ font-size:11.5px; }
+
+  .services-grid{ grid-template-columns:1fr; }
+  .service-card{ padding:32px 24px; }
+
+  .gallery-grid{ grid-template-columns:repeat(2,1fr); grid-auto-rows:140px; gap:8px; }
+
+  .review-card{ flex:0 0 100%; padding:28px 22px; }
+  .reviews-track-wrap{ overflow:hidden; }
+
+  .footer-grid{ grid-template-columns:1fr; gap:36px; }
+  .footer-bottom{ flex-direction:column; align-items:flex-start; text-align:left; gap:10px; }
+
+  .pricing-tabs{ gap:8px; }
+  .pricing-tab{ padding:9px 16px; font-size:11.5px; letter-spacing:1px; }
+
+  .price-row{ padding:14px 0; }
+  .price-row .name{ font-size:18px; }
+  .price-row .amount{ font-size:19px; }
+
+  .whatsapp-float{ width:50px; height:50px; font-size:24px; bottom:20px; right:20px; }
+}
+
+@media (max-width: 400px){
+  .hero h1{ font-size:36px; }
+  .hero-actions .btn{ padding:12px 20px; font-size:12px; }
+  .stat b{ font-size:32px; }
+  .about-stats{ gap:20px; }
+}
+
+/* =========================================================
+   APPOINTMENT MODAL — LUXURY GLASSMORPHISM UI
+   ========================================================= */
+.apt-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 8, 10, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 2100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s var(--ease);
+  overflow-y: auto;
+}
+
+.apt-overlay.open {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.apt-card {
+  width: 100%;
+  max-width: 490px;
+  background: rgba(22, 22, 24, 0.94);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(198, 161, 91, 0.22);
+  border-radius: 28px;
+  padding: 34px 30px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.9), 0 0 35px rgba(198, 161, 91, 0.08);
+  position: relative;
+  transform: scale(0.92) translateY(18px);
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s var(--ease);
+  margin: auto;
+}
+
+.apt-overlay.open .apt-card {
+  transform: scale(1) translateY(0);
+}
+
+.apt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22px;
+}
+
+.apt-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.apt-logo-mark {
+  width: 42px;
+  height: 42px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.apt-logo-mark svg {
+  width: 100%;
+  height: 100%;
+  animation: spin 30s linear infinite;
+}
+.apt-logo-center {
+  position: absolute;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.apt-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+.apt-brand-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  color: var(--white);
+  letter-spacing: 0.8px;
+  line-height: 1.1;
+  font-weight: 600;
+}
+.apt-brand-sub {
+  font-family: var(--font-display);
+  font-size: 11px;
+  color: var(--gold);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+.apt-close {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s var(--ease);
+}
+.apt-close:hover {
+  background: var(--gold);
+  color: var(--black);
+  transform: rotate(90deg) scale(1.05);
+}
+
+.apt-title-group {
+  margin-bottom: 24px;
+}
+.apt-subtitle {
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 3.5px;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.apt-title {
+  font-family: var(--font-display);
+  font-size: 32px;
+  color: var(--white);
+  font-weight: 400;
+  line-height: 1.15;
+}
+
+.apt-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.apt-input-group {
+  position: relative;
+  width: 100%;
+}
+
+.apt-input, .apt-select {
+  width: 100%;
+  height: 52px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 26px;
+  padding: 0 22px;
+  color: var(--white);
+  font-family: var(--font-body);
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s var(--ease);
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.apt-input::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.apt-input:focus, .apt-select:focus {
+  border-color: var(--gold);
+  background: rgba(198, 161, 91, 0.08);
+  box-shadow: 0 0 16px rgba(198, 161, 91, 0.25);
+}
+
+.apt-select {
+  cursor: pointer;
+  padding-right: 44px;
+  color: var(--white);
+}
+.apt-select option {
+  background: var(--charcoal);
+  color: var(--white);
+  padding: 10px;
+}
+
+.apt-select-arrow {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--gold);
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.apt-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.apt-input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.8) sepia(0.5) saturate(3) hue-rotate(5deg);
+  cursor: pointer;
+}
+
+.apt-submit-btn {
+  width: 100%;
+  height: 54px;
+  margin-top: 8px;
+  border-radius: 27px;
+  border: none;
+  background: linear-gradient(135deg, var(--gold-light), var(--gold));
+  color: var(--black);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.35s var(--ease);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 8px 25px rgba(198, 161, 91, 0.35);
+}
+
+.apt-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(198, 161, 91, 0.5);
+  background: linear-gradient(135deg, #ffffff, var(--gold-light));
+}
+
+.apt-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.apt-footer-note {
+  margin-top: 14px;
+  text-align: center;
+  font-size: 12px;
+  color: rgba(248, 245, 239, 0.6);
+  line-height: 1.4;
+}
+
+.apt-alert {
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-size: 13px;
+  display: none;
+  margin-bottom: 12px;
+}
+.apt-alert.error {
+  display: block;
+  background: rgba(220, 53, 69, 0.15);
+  border: 1px solid rgba(220, 53, 69, 0.4);
+  color: #ff808b;
+}
+
+.apt-success-view {
+  display: none;
+  text-align: center;
+  padding: 15px 0 5px;
+}
+.apt-success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(198, 161, 91, 0.15);
+  border: 1.5px solid var(--gold);
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  margin: 0 auto 18px;
+  animation: popIn 0.5s var(--ease);
+}
+@keyframes popIn { 0%{ transform: scale(0); } 70%{ transform: scale(1.15); } 100%{ transform: scale(1); } }
+.apt-success-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--white);
+  margin-bottom: 10px;
+}
+.apt-success-desc {
+  color: var(--muted);
+  font-size: 15px;
+  margin-bottom: 24px;
+  line-height: 1.6;
+}
+
+@media (max-width: 520px) {
+  .apt-card {
+    padding: 26px 20px;
+    border-radius: 24px;
+  }
+  .apt-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .apt-title {
+    font-size: 28px;
+  }
+}
+
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     HEADER / NAV (LOGO ONLY ON LEFT, ANIMATED BUTTON ON RIGHT)
+     ========================================================= -->
+<header class="site-header" id="siteHeader">
+  <div class="container">
+    <a href="#home" class="logo-brand" aria-label="Roots Magma Unisex Salon">
+      <div class="logo-mark-svg">
+        <svg viewBox="0 0 200 200">
+          <defs>
+            <path id="headerSealCircle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/>
+          </defs>
+          <circle cx="100" cy="100" r="94" fill="none" stroke="#c6a15b" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="60" fill="none" stroke="#c6a15b" stroke-width="1.5"/>
+          <text font-family="Jost" font-size="11.5" letter-spacing="3" fill="#c6a15b">
+            <textPath href="#headerSealCircle" startOffset="0%">ROOTS MAGMA UNISEX SALON • EST. 1985 • AMRAVATI •</textPath>
+          </text>
+        </svg>
+        <span class="logo-mark-center">RM</span>
+      </div>
+      <div class="logo-text-group">
+        <span class="logo-title">Roots Magma <strong>Unisex Salon</strong></span>
+        <span class="logo-subtitle">Est. 1985 · Amravati</span>
+      </div>
+    </a>
+
+    <!-- Super Animated 2-Line to Cross Hamburger Button -->
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+      <span class="hamburger-line line-1"></span>
+      <span class="hamburger-line line-2"></span>
+    </button>
+  </div>
+</header>
+
+<!-- =========================================================
+     FULLSCREEN SUPER-ANIMATED MENU OVERLAY
+     ========================================================= -->
+<div class="menu-overlay" id="menuOverlay">
+  <nav class="menu-nav">
+    <a href="#home" class="menu-nav-link">Home</a>
+    <a href="#about" class="menu-nav-link">About</a>
+    <a href="#pricing" class="menu-nav-link">Pricing</a>
+    <a href="#gallery" class="menu-nav-link">Gallery</a>
+    <a href="#services" class="menu-nav-link">Services</a>
+    <a href="#contact" class="menu-nav-link">Contact Us</a>
+    <a href="#" class="menu-nav-link trigger-apt-modal">Book Appointment</a>
+  </nav>
+  <div class="menu-footer-note">Roots Magma Unisex Salon · Est. 1985</div>
+</div>
+
+<!-- =========================================================
+     HERO
+     ========================================================= -->
+<section class="hero" id="home">
+  <div class="container hero-content">
+    <div class="eyebrow">Est. 1985 · 39+ Years of Craft · Camp Road, Amravati</div>
+    <h1>The Art of Looking <em>Effortless</em></h1>
+    <p>Roots Magma Unisex Salon blends 39+ years of heritage with modern luxury — precision haircuts, hydra-facials, hair spa rituals, balayage coloring, and bridal &amp; groom artistry at Next Level Mall, Camp Road.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-solid"><i class="fa-solid fa-location-dot"></i> Visit Salon</a>
+      <a href="https://wa.me/919890640303" target="_blank" rel="noopener" class="btn"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+    </div>
+  </div>
+
+  <!-- Signature SVG Logo Emblem in Hero -->
+  <div class="seal" aria-hidden="true">
+    <svg viewBox="0 0 200 200">
+      <defs>
+        <path id="sealCircle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/>
+      </defs>
+      <circle cx="100" cy="100" r="94" fill="none" stroke="#c6a15b" stroke-width="1"/>
+      <circle cx="100" cy="100" r="60" fill="none" stroke="#c6a15b" stroke-width="1"/>
+      <text font-family="Jost" font-size="11.5" letter-spacing="3" fill="#c6a15b">
+        <textPath href="#sealCircle" startOffset="0%">ROOTS MAGMA UNISEX SALON • EST. 1985 • AMRAVATI •</textPath>
+      </text>
+    </svg>
+    <span class="seal-center">RM</span>
+  </div>
+
+  <div class="scroll-cue"><span></span>Scroll</div>
+</section>
+
+<!-- =========================================================
+     ABOUT
+     ========================================================= -->
+<section class="section" id="about">
+  <div class="container about-grid">
+    <div class="about-media reveal">
+      <div class="frame"></div>
+      <img src="https://uploads.onecompiler.io/44npcw39r/44xx6uarh/b0c36341-c3ef-4cc5-9bf0-b40a71df2296.png" alt="Interior of Roots Magma Unisex Salon Amravati">
+    </div>
+    <div class="about-copy reveal">
+      <div class="eyebrow">About Roots Magma Unisex Salon</div>
+      <h2 class="section-title">Amravati's Trusted Legacy in Hair &amp; Beauty Since 1985</h2>
+      <p>Established in 1985, Roots Magma Unisex Salon (located at Next Level Mall, Ground Floor Shop No. 5, opposite Hotel Great Mehfil, Camp Road, Amravati) is one of Amravati's most loved hair &amp; skin destinations. For nearly four decades, we have provided precision grooming, advanced hair therapies, and wedding day artistry for both men and women.</p>
+      <p>Our senior stylists continually train in the latest international techniques, offering unhurried, personalized attention with premium dermatologically-tested products.</p>
+      <ul class="about-list">
+        <li><i class="fa-solid fa-check"></i> Certified master stylists &amp; skin therapists</li>
+        <li><i class="fa-solid fa-check"></i> Advanced Hydra-Facials &amp; Keratin Treatments</li>
+        <li><i class="fa-solid fa-check"></i> Hygienic, private unisex treatment suites</li>
+      </ul>
+      <div class="about-stats">
+        <div class="stat"><b>39+</b><span>Years of Craft</span></div>
+        <div class="stat"><b>25k+</b><span>Happy Clients</span></div>
+        <div class="stat"><b>4.5★</b><span>Google Rating</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="gold-thread" data-reveal></div></div>
+
+<!-- =========================================================
+     SERVICES
+     ========================================================= -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Our Services</div>
+      <h2 class="section-title">Crafted For Men &amp; Women</h2>
+      <p class="section-sub">Signature hair, skin, and grooming treatments performed with top-tier tools and unhurried care.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="services-grid reveal">
+      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-scissors"></i></div><h3>Haircut &amp; Styling</h3><p>Precision cuts tailored to your face structure and style for both men and women.</p></div>
+      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-user-tie"></i></div><h3>Beard Styling &amp; Shave</h3><p>Sharp shape-ups, beard trimming, conditioning, and traditional razor shaves.</p></div>
+      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-spa"></i></div><h3>Hair Spa &amp; Care</h3><p>Restorative oil rituals and deep-conditioning masks to revive hair health from root to tip.</p></div>
+      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-hand-sparkles"></i></div><h3>Hydra-Facial &amp; Skincare</h3><p>Advanced deep-pore cleansing, anti-aging facials, and radiance-boosting treatments.</p></div>
+      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-soap"></i></div><h3>Quick Cleanup</h3><p>Express skin cleansing and exfoliation for an instant glow before any occasion.</p></div>
+      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-palette"></i></div><h3>Hair Color &amp; Balayage</h3><p>Global hair color, highlights, and ammonia-free grey coverage formulas.</p></div>
+      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div><h3>Keratin &amp; Smoothening</h3><p>Long-lasting frizz control and hair smoothing for silky, manageable hair.</p></div>
+      <div class="service-card"><div class="service-icon"><i class="fa-solid fa-crown"></i></div><h3>Bridal &amp; Groom Makeup</h3><p>Full HD bridal &amp; groom makeup, trial sessions, draping, and occasion hair styling.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     PRICING
+     ========================================================= -->
+<section class="section" id="pricing" style="background:var(--charcoal);">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Pricing</div>
+      <h2 class="section-title">Transparent &amp; Fair Pricing</h2>
+      <p class="section-sub">Indicative pricing for our most popular treatments. Final pricing may vary by hair length &amp; custom styling.</p>
+    </div>
+
+    <div class="pricing-tabs reveal">
+      <button class="pricing-tab active" data-tab="men">For Men</button>
+      <button class="pricing-tab" data-tab="women">For Women</button>
+      <button class="pricing-tab" data-tab="bridal">Bridal &amp; Groom</button>
+    </div>
+
+    <div class="pricing-table active" id="tab-men">
+      <div>
+        <div class="price-row"><div class="name">Classic Haircut<small>Wash, precision cut &amp; styling</small></div><div class="amount">₹250</div></div>
+        <div class="price-row"><div class="name">Beard Shape-Up<small>Trim, line-up &amp; beard oil</small></div><div class="amount">₹150</div></div>
+        <div class="price-row"><div class="name">Hot Towel Shave<small>Traditional razor shave with massage</small></div><div class="amount">₹200</div></div>
+        <div class="price-row"><div class="name">Men's Hair Spa<small>Scalp relaxation &amp; nourishment</small></div><div class="amount">₹350</div></div>
+      </div>
+      <div>
+        <div class="price-row"><div class="name">Grey Coverage / Color<small>Ammonia-free men's color</small></div><div class="amount">₹400</div></div>
+        <div class="price-row"><div class="name">Brightening Facial<small>Deep cleansing &amp; glow</small></div><div class="amount">₹350</div></div>
+        <div class="price-row"><div class="name">Express Cleanup<small>Quick exfoliation refresh</small></div><div class="amount">₹200</div></div>
+        <div class="price-row"><div class="name">Keratin Frizz Therapy<small>Smoothening &amp; shine</small></div><div class="amount">₹950</div></div>
+      </div>
+    </div>
+
+    <div class="pricing-table" id="tab-women">
+      <div>
+        <div class="price-row"><div class="name">Women's Haircut &amp; Blow-Dry<small>Wash, layer/style cut &amp; blow-dry</small></div><div class="amount">₹350</div></div>
+        <div class="price-row"><div class="name">Nourishing Hair Spa<small>Deep conditioning mask</small></div><div class="amount">₹450</div></div>
+        <div class="price-row"><div class="name">Global Hair Color<small>Rich, long-lasting shades</small></div><div class="amount">₹800</div></div>
+        <div class="price-row"><div class="name">Balayage / Highlights<small>Custom streak styling</small></div><div class="amount">₹1,000</div></div>
+      </div>
+      <div>
+        <div class="price-row"><div class="name">Hydra-Facial Ritual<small>Skin hydration &amp; deep pore clean</small></div><div class="amount">₹650</div></div>
+        <div class="price-row"><div class="name">Radiance Glow Cleanup<small>Dead skin removal &amp; pack</small></div><div class="amount">₹250</div></div>
+        <div class="price-row"><div class="name">Keratin Treatment<small>Full hair smoothening</small></div><div class="amount">₹1,400</div></div>
+        <div class="price-row"><div class="name">Occasion Hair &amp; Blow-Dry<small>Party styling</small></div><div class="amount">₹300</div></div>
+      </div>
+    </div>
+
+    <div class="pricing-table" id="tab-bridal">
+      <div>
+        <div class="price-row"><div class="name">Full HD Bridal Makeup<small>Includes HD makeup, hair &amp; trial</small></div><div class="amount">₹2,800</div></div>
+        <div class="price-row"><div class="name">Bridal Hair &amp; Saree Draping<small>Traditional &amp; modern styles</small></div><div class="amount">₹1,200</div></div>
+        <div class="price-row"><div class="name">Pre-Bridal Glow Package<small>4-step skin &amp; hair preparation</small></div><div class="amount">₹3,200</div></div>
+      </div>
+      <div>
+        <div class="price-row"><div class="name">Groom Special Package<small>Haircut, beard, facial &amp; hair spa</small></div><div class="amount">₹1,200</div></div>
+        <div class="price-row"><div class="name">Party / Engagement Makeup<small>Guest &amp; sangeet makeover</small></div><div class="amount">₹900</div></div>
+        <div class="price-row"><div class="name">Mehendi &amp; Skin Add-ons<small>By appointment</small></div><div class="amount">₹500</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FULL PRICE MENU CARD
+     ========================================================= -->
+<section class="section" id="menu-card" style="padding:80px 0; background:var(--black);">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Full Rate Card</div>
+      <h2 class="section-title">Salon &amp; Spa Price Menu</h2>
+      <p class="section-sub">Skin treatments, hair coloring, male grooming, facials, waxing, manicures, pedicures &amp; bridal packages.</p>
+    </div>
+
+    <div class="menu-card-wrap reveal" style="max-width:820px; margin:0 auto; text-align:center;">
+      <div class="menu-card-frame" style="position:relative; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); box-shadow:0 20px 60px rgba(0,0,0,0.9); cursor:pointer;">
+        <img src="price-menu-card.png" alt="Roots Magma Salon &amp; Spa Complete Price Menu Card" id="menuCardImg" style="width:100%; height:auto; display:block; transition:transform 0.5s var(--ease);">
+      </div>
+      <p style="margin-top:16px; font-size:13px; letter-spacing:2px; color:var(--gold); text-transform:uppercase;">Click menu card to view full screen</p>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="gold-thread" data-reveal></div></div>
+
+<!-- =========================================================
+     GALLERY
+     ========================================================= -->
+<section class="section" id="gallery">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Gallery</div>
+      <h2 class="section-title">Inside Roots Magma Unisex Salon</h2>
+    </div>
+    <div class="gallery-grid reveal">
+      <div class="gallery-item"><img src="https://uploads.onecompiler.io/44npcw39r/1787051920469/c8e066c3-ef15-4578-bb06-c4f2966a6cb2.png" alt="Roots Magma Unisex Salon styling station"></div>
+      <div class="gallery-item"><img src="https://uploads.onecompiler.io/44npcw39r/1787052263221/WhatsApp%20Image%202026-08-17%20at%203.59.40%20PM.jpeg" alt="Haircut styling in progress"></div>
+      <div class="gallery-item"><img src="https://uploads.onecompiler.io/44npcw39r/1787052108501/WhatsApp%20Image%202026-08-17%20at%203.59.38%20PM.png" alt="hair style"></div>
+      <div class="gallery-item"><img src="https://uploads.onecompiler.io/44npcw39r/1787052348498/WhatsApp%20Image%202026-08-17%20at%203.59.33%20PM.jpeg" alt="Hair color transformation"></div>
+      <div class="gallery-item"><img src="https://uploads.onecompiler.io/44npcw39r/1787052179437/WhatsApp%20Image%202026-08-17%20at%203.59.36%20PM.jpeg" alt="curley hair style"></div>
+      <div class="gallery-item"><img src="https://uploads.onecompiler.io/44npcw39r/1787051968694/8fcf51e7-b431-456f-8c6e-bedcf6d60e84.png" alt="Bridal &amp; makeup artistry"></div>
+    </div>
+  </div>
+</section>
+
+<div class="container"><div class="gold-thread" data-reveal></div></div>
+
+<!-- =========================================================
+     REVIEWS
+     ========================================================= -->
+<section class="section" id="reviews" style="background:var(--charcoal);">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Customer Reviews</div>
+      <h2 class="section-title">Loved By Amravati</h2>
+    </div>
+    <div class="reviews-track-wrap reveal">
+      <div class="reviews-track" id="reviewsTrack">
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p>"Roots Magma is Top most salon in Amravati, Praful sir is real magician👌🏻 make my haircut/hairhighlight very elegant …more than my expectations beautiful service, staff is super respectful and best service ever… I Specially came from Europe to make my haircut and highlight in this salon every year..Thanks again all staff of roots ..visit you again soon…Thanks by Dharati"</p>
+          <div class="review-person"><img src="https://uploads.onecompiler.io/44npcw39r/1787052547207/unnamed.png" alt="Dharati Metkar photo"><div><b>Dharati Metkar</b><span>Haircut &amp; Hair Highlights</span></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p>"Excellent service! Highly recommended by me. Best service experience ever. My go to salon for all experiments 🩷🩷🩷 love Ankita"</p>
+          <div class="review-person"><img src="https://uploads.onecompiler.io/44npcw39r/1787052671984/unnamed%20(1).png" alt="Ankita Deshmukh photo"><div><b>Ankita Deshmukh</b><span>Hair &amp; Skin Care</span></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p>"Bhot achi haircut Kiya h bhaiya ne Service bhot achi h thank you. They use top brand products, and the staff treats you with great warmth. Must visit once!"</p>
+          <div class="review-person"><img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80&w=200&auto=format&fit=crop" alt="Sneha Patil photo"><div><b>Sneha Patil</b><span>Bridal &amp; Party Makeup</span></div></div>
+        </div>
+        <div class="review-card">
+          <div class="review-stars">★★★★★</div>
+          <p>"I was nervous about getting my first hair highlights. But Praful Sir was very patient in answering all my queries and helped me understand different styles, hair textures and colors. He highlighted my hair fantastically. Praful Sir is an expert in what he does and most detail-oriented hairstylist I have ever seen. Praful Sir kept working on every detail of my hair highlights until it was perfect. He also educated me about hair color aftercare. If you’re seeking a completely new look or makeover, go to Root’s salon without a second thought. Best service, Polite staff and budget friendly."</p>
+          <div class="review-person"><img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="Rajesh Verma photo"><div><b>Rajesh Verma</b><span>Hair Color &amp; Styling</span></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="reviews-nav">
+      <button id="revPrev" aria-label="Previous reviews"><i class="fa-solid fa-arrow-left"></i></button>
+      <button id="revNext" aria-label="Next reviews"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     CONTACT
+     ========================================================= -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">Contact Us</div>
+      <h2 class="section-title">Visit Or Reach Out</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="reveal">
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="ico"><i class="fa-solid fa-phone"></i></div>
+            <div>
+              <h4>Call Us</h4>
+              <p><a href="tel:+919890954265">+91 98909 54265</a>, <a href="tel:+917020479969">+91 70204 79969</a></p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="ico"><i class="fa-brands fa-whatsapp"></i></div>
+            <div><h4>WhatsApp</h4><a href="https://wa.me/919890640303" target="_blank" rel="noopener">+91 98906 40303</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="ico"><i class="fa-brands fa-instagram"></i></div>
+            <div><h4>Instagram</h4><a href="https://www.instagram.com/roots_magma/?hl=en" target="_blank" rel="noopener">@roots_magma</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="ico"><i class="fa-brands fa-facebook-f"></i></div>
+            <div><h4>Facebook</h4><a href="https://www.facebook.com/profile.php?id=100083133436840" target="_blank" rel="noopener">Roots Magma Unisex Salon</a></div>
+          </div>
+          <div class="contact-item">
+            <div class="ico"><i class="fa-solid fa-location-dot"></i></div>
+            <div><h4>Address</h4><p><a href="https://maps.app.goo.gl/vBYV8XsTvvbYEmtp6" target="_blank" rel="noopener">Camp Road, opposite Hotel Great Mehfil, Next Level Mall, Ground Floor Shop No. 5, Amravati, Maharashtra 444602</a></p></div>
+          </div>
+          <div class="contact-item">
+            <div class="ico"><i class="fa-regular fa-clock"></i></div>
+            <div style="width:100%;">
+              <h4>Business Hours</h4>
+              <table class="hours-table">
+                <tr><td>Monday – Sunday</td><td>10:00 AM – 9:00 PM</td></tr>
+                <tr><td>Appointments</td><td>Walk-ins &amp; Prior Booking Welcome</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal map-wrap">
+        <a href="https://maps.app.goo.gl/vBYV8XsTvvbYEmtp6" target="_blank" rel="noopener" aria-label="Open Roots Magma Unisex Salon on Google Maps" style="display:block; width:100%; height:100%; position:relative;">
+          <iframe class="map-frame" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3726.7905872922116!2d77.7475!3d20.9328!2m3!1f00!2f00!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd6a4c28d251d1f%3A0x6b30fbc026210f1!2sCamp%20Road%2C%20Amravati%2C%20Maharashtra%20444602!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Roots Magma Unisex Salon location map" style="pointer-events:none;"></iframe>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FAQ
+     ========================================================= -->
+<section class="section" id="faq" style="background:var(--charcoal);">
+  <div class="container">
+    <div class="section-head center reveal">
+      <div class="eyebrow">FAQ</div>
+      <h2 class="section-title">Good to Know</h2>
+    </div>
+    <div class="faq-list reveal" id="faqList">
+      <div class="faq-item open">
+        <div class="faq-q">Where is Roots Magma Unisex Salon located? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>We are located at Ground Floor Shop No. 5, Next Level Mall, opposite Hotel Great Mehfil, Camp Road, Amravati, Maharashtra 444602.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do I need an advance booking? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>Walk-ins are always welcome! However, for weekend slots, hydra facials, and bridal/groom makeup, we recommend calling or messaging via WhatsApp in advance.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Do you cater to both men and women? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>Yes! We are a full-service unisex salon offering dedicated haircutting, beard styling, hair care, hydra-facials, and makeup for both men and women.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">What are your opening hours? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>We are open 7 days a week from 10:00 AM to 9:00 PM.</p></div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Which payment options do you accept? <i class="fa-solid fa-plus"></i></div>
+        <div class="faq-a"><p>We accept cash, UPI / Google Pay / PhonePe, and major credit &amp; debit cards.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section class="cta-strip">
+  <div class="container">
+    <h2>Ready For Your Transformation?</h2>
+    <p>Visit Roots Magma Unisex Salon at Next Level Mall, Camp Road, Amravati — experience 39+ years of hair &amp; skin excellence.</p>
+    <a href="https://wa.me/919890640303" target="_blank" rel="noopener" class="btn"><i class="fa-brands fa-whatsapp"></i> Chat on WhatsApp</a>
+  </div>
+</section>
+
+<!-- =========================================================
+     FOOTER
+     ========================================================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-about">
+        <a href="#home" class="logo-brand">
+          <div class="logo-mark-svg">
+            <svg viewBox="0 0 200 200">
+              <defs>
+                <path id="footerSealCircle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/>
+              </defs>
+              <circle cx="100" cy="100" r="94" fill="none" stroke="#c6a15b" stroke-width="1.5"/>
+              <circle cx="100" cy="100" r="60" fill="none" stroke="#c6a15b" stroke-width="1.5"/>
+              <text font-family="Jost" font-size="11.5" letter-spacing="3" fill="#c6a15b">
+                <textPath href="#footerSealCircle" startOffset="0%">ROOTS MAGMA UNISEX SALON • EST. 1985 • AMRAVATI •</textPath>
+              </text>
+            </svg>
+            <span class="logo-mark-center">RM</span>
+          </div>
+          <div class="logo-text-group">
+            <span class="logo-title">Roots Magma <strong>Unisex Salon</strong></span>
+            <span class="logo-subtitle">Est. 1985 · Amravati</span>
+          </div>
+        </a>
+        <p>Amravati's premier hair, skincare, and bridal grooming studio established in 1985 at Camp Road.</p>
+        <div class="social-row">
+          <a href="https://www.facebook.com/profile.php?id=100083133436840" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+          <a href="https://www.instagram.com/roots_magma/?hl=en" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+          <a href="https://wa.me/919890640303" target="_blank" rel="noopener" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+          <a href="tel:+919890954265" aria-label="Phone"><i class="fa-solid fa-phone"></i></a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#gallery">Gallery</a></li>
+          <li><a href="#contact">Contact Us</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="tel:+919890954265">+91 98909 54265</a></li>
+          <li><a href="tel:+917020479969">+91 70204 79969</a></li>
+          <li><a href="https://wa.me/919890640303" target="_blank" rel="noopener">WhatsApp: +91 98906 40303</a></li>
+          <li><a href="https://www.instagram.com/roots_magma/?hl=en" target="_blank" rel="noopener">Instagram: @roots_magma</a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=100083133436840" target="_blank" rel="noopener">Facebook Page</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Location</h4>
+        <ul>
+          <li><a href="https://maps.app.goo.gl/vBYV8XsTvvbYEmtp6" target="_blank" rel="noopener">Ground Floor Shop No. 5</a></li>
+          <li><a href="https://maps.app.goo.gl/vBYV8XsTvvbYEmtp6" target="_blank" rel="noopener">Next Level Mall, Opp. Hotel Great Mehfil</a></li>
+          <li><a href="https://maps.app.goo.gl/vBYV8XsTvvbYEmtp6" target="_blank" rel="noopener">Camp Road, Amravati 444602</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> Roots Magma Unisex Salon. All rights reserved.</span>
+      <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+<a class="whatsapp-float" href="https://wa.me/919890640303" target="_blank" rel="noopener" aria-label="Chat on WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
+  <img id="lightboxImg" src="" alt="Gallery preview">
+</div>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+/* Sticky header */
+const header = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => {
+  header.classList.toggle('scrolled', window.scrollY > 40);
+});
+
+/* Super Animated Fullscreen Overlay Menu Toggle */
+const navToggle = document.getElementById('navToggle');
+const menuOverlay = document.getElementById('menuOverlay');
+
+function toggleMenu(show) {
+  const isOpen = show !== undefined ? show : !menuOverlay.classList.contains('open');
+  menuOverlay.classList.toggle('open', isOpen);
+  navToggle.classList.toggle('open', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+}
+
+navToggle.addEventListener('click', () => toggleMenu());
+
+document.querySelectorAll('.menu-nav-link').forEach(link => {
+  link.addEventListener('click', () => toggleMenu(false));
+});
+
+/* Scroll reveal */
+const revealTargets = document.querySelectorAll('.reveal, .gold-thread');
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('is-visible');
+      io.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1 });
+revealTargets.forEach(t => io.observe(t));
+
+/* Pricing tabs */
+document.querySelectorAll('.pricing-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.pricing-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.pricing-table').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    const targetTable = document.getElementById('tab-' + tab.dataset.tab);
+    if(targetTable) {
+      targetTable.classList.add('active');
+    }
+  });
+});
+
+/* Gallery & Menu Card lightbox */
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = document.getElementById('lightboxImg');
+document.querySelectorAll('.gallery-item img, #menuCardImg').forEach(img => {
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+});
+function closeLightbox() {
+  lightbox.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.getElementById('lightboxClose').addEventListener('click', closeLightbox);
+lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+
+/* Reviews slider with Touch/Swipe support */
+const track = document.getElementById('reviewsTrack');
+const cards = track ? track.children : [];
+let revIndex = 0;
+
+function cardsPerView(){
+  if (window.innerWidth <= 640) return 1;
+  if (window.innerWidth <= 1080) return 2;
+  return 3;
+}
+
+function updateSlider(){
+  if (!track || !cards.length) return;
+  const per = cardsPerView();
+  const max = Math.max(0, cards.length - per);
+  if (revIndex > max) revIndex = max;
+  if (revIndex < 0) revIndex = 0;
+  
+  // Calculate exact percentage shift
+  const gapPx = 28;
+  const cardWidth = (track.parentElement.clientWidth - (gapPx * (per - 1))) / per;
+  const shift = revIndex * (cardWidth + gapPx);
+  
+  track.style.transform = `translateX(-${shift}px)`;
+}
+
+document.getElementById('revNext')?.addEventListener('click', () => {
+  const per = cardsPerView();
+  const max = Math.max(0, cards.length - per);
+  revIndex = revIndex >= max ? 0 : revIndex + 1;
+  updateSlider();
+});
+
+document.getElementById('revPrev')?.addEventListener('click', () => {
+  const per = cardsPerView();
+  const max = Math.max(0, cards.length - per);
+  revIndex = revIndex <= 0 ? max : revIndex - 1;
+  updateSlider();
+});
+
+/* Touch Swipe Handler for Mobile Reviews */
+let startX = 0;
+let dist = 0;
+const wrap = document.querySelector('.reviews-track-wrap');
+if (wrap) {
+  wrap.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+    dist = 0;
+  }, { passive: true });
+
+  wrap.addEventListener('touchmove', (e) => {
+    dist = e.touches[0].clientX - startX;
+  }, { passive: true });
+
+  wrap.addEventListener('touchend', () => {
+    if (Math.abs(dist) > 40) {
+      if (dist < 0) {
+        document.getElementById('revNext')?.click();
+      } else {
+        document.getElementById('revPrev')?.click();
+      }
+    }
+  });
+}
+
+window.addEventListener('resize', updateSlider);
+// Initial calculation
+updateSlider();
+
+/* FAQ accordion */
+document.querySelectorAll('.faq-item').forEach(item => {
+  const answer = item.querySelector('.faq-a');
+  if (item.classList.contains('open')) answer.style.maxHeight = answer.scrollHeight + 'px';
+  item.querySelector('.faq-q').addEventListener('click', () => {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-a').style.maxHeight = '0px';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+</script>
+
+<!-- =========================================================
+     LUXURY GLASSMORPHIC APPOINTMENT MODAL
+     ========================================================= -->
+<div class="apt-overlay" id="aptOverlay">
+  <div class="apt-card" id="aptCard">
+    <!-- Header -->
+    <div class="apt-header">
+      <div class="apt-brand">
+        <div class="apt-logo-mark">
+          <svg viewBox="0 0 200 200">
+            <defs>
+              <path id="modalSealCircle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/>
+            </defs>
+            <circle cx="100" cy="100" r="94" fill="none" stroke="#c6a15b" stroke-width="1.5"/>
+            <circle cx="100" cy="100" r="60" fill="none" stroke="#c6a15b" stroke-width="1.5"/>
+            <text font-family="Jost" font-size="11.5" letter-spacing="3" fill="#c6a15b">
+              <textPath href="#modalSealCircle" startOffset="0%">ROOTS MAGMA UNISEX SALON • EST. 1985 • AMRAVATI •</textPath>
+            </text>
+          </svg>
+          <span class="apt-logo-center">RM</span>
+        </div>
+        <div class="apt-brand-text">
+          <span class="apt-brand-title">RUTH MAGMA</span>
+          <span class="apt-brand-sub">Unisex Salon</span>
+        </div>
+      </div>
+      <button class="apt-close" id="aptClose" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <!-- Form View -->
+    <div id="aptFormView">
+      <div class="apt-title-group">
+        <div class="apt-subtitle">APPOINTMENT CONSOLE</div>
+        <h3 class="apt-title">Reserve your chair</h3>
+      </div>
+
+      <div class="apt-alert" id="aptAlert"></div>
+
+      <form class="apt-form" id="appointmentForm" novalidate>
+        <div class="apt-input-group">
+          <input type="text" id="aptName" class="apt-input" placeholder="Full name" required>
+        </div>
+
+        <div class="apt-input-group">
+          <input type="tel" id="aptPhone" class="apt-input" placeholder="Phone number" required>
+        </div>
+
+        <div class="apt-input-group">
+          <select id="aptService" class="apt-select" required>
+            <option value="" disabled selected>Select a service</option>
+            <option value="Haircut & Styling">Haircut &amp; Styling</option>
+            <option value="Beard Styling & Shave">Beard Styling &amp; Shave</option>
+            <option value="Hydra-Facial Ritual">Hydra-Facial Ritual</option>
+            <option value="Hair Spa & Scalp Care">Hair Spa &amp; Scalp Care</option>
+            <option value="Hair Color & Balayage">Hair Color &amp; Balayage</option>
+            <option value="Keratin & Smoothening">Keratin &amp; Smoothening</option>
+            <option value="Express Skin Cleanup">Express Skin Cleanup</option>
+            <option value="Full HD Bridal Makeup">Full HD Bridal Makeup</option>
+            <option value="Groom Special Package">Groom Special Package</option>
+          </select>
+          <i class="fa-solid fa-chevron-down apt-select-arrow"></i>
+        </div>
+
+        <div class="apt-grid-2">
+          <div class="apt-input-group">
+            <input type="date" id="aptDate" class="apt-input" required>
+          </div>
+          <div class="apt-input-group">
+            <select id="aptTime" class="apt-select" required>
+              <option value="" disabled selected>Select time</option>
+              <option value="10:00 AM">10:00 AM</option>
+              <option value="11:00 AM">11:00 AM</option>
+              <option value="12:00 PM">12:00 PM</option>
+              <option value="01:00 PM">01:00 PM</option>
+              <option value="02:00 PM">02:00 PM</option>
+              <option value="03:00 PM">03:00 PM</option>
+              <option value="04:00 PM">04:00 PM</option>
+              <option value="05:00 PM">05:00 PM</option>
+              <option value="06:00 PM">06:00 PM</option>
+              <option value="07:00 PM">07:00 PM</option>
+              <option value="08:00 PM">08:00 PM</option>
+            </select>
+            <i class="fa-solid fa-chevron-down apt-select-arrow"></i>
+          </div>
+        </div>
+
+        <button type="submit" class="apt-submit-btn" id="aptSubmitBtn">
+          <span>BOOK APPOINTMENT</span>
+        </button>
+
+        <p class="apt-footer-note">We’ll confirm your appointment personally on WhatsApp.</p>
+      </form>
+    </div>
+
+    <!-- Success View -->
+    <div class="apt-success-view" id="aptSuccessView">
+      <div class="apt-success-icon"><i class="fa-solid fa-check"></i></div>
+      <h3 class="apt-success-title">Appointment Request Received ✓</h3>
+      <p class="apt-success-desc">Your appointment request has been submitted successfully.<br><strong style="color:var(--gold);">We’ll confirm your appointment personally on WhatsApp.</strong></p>
+      <button class="apt-submit-btn" id="aptDoneBtn" style="margin: 0 auto; max-width: 200px;"><span>DONE</span></button>
+    </div>
+  </div>
+</div>
+
+<script>
+
+/* =========================================================
+   APPOINTMENT MODAL INTERACTION & API SUBMISSION
+   ========================================================= */
+const aptOverlay = document.getElementById('aptOverlay');
+const aptClose = document.getElementById('aptClose');
+const appointmentForm = document.getElementById('appointmentForm');
+const aptFormView = document.getElementById('aptFormView');
+const aptSuccessView = document.getElementById('aptSuccessView');
+const aptAlert = document.getElementById('aptAlert');
+const aptSubmitBtn = document.getElementById('aptSubmitBtn');
+const aptDate = document.getElementById('aptDate');
+
+if (aptDate) {
+  const todayIso = new Date().toISOString().split('T')[0];
+  aptDate.min = todayIso;
+}
+
+function openAppointmentModal(defaultService) {
+  if (defaultService) {
+    const select = document.getElementById('aptService');
+    if (select) {
+      for (let opt of select.options) {
+        if (opt.value.toLowerCase().includes(defaultService.toLowerCase())) {
+          opt.selected = true;
+          break;
+        }
+      }
+    }
+  }
+  aptFormView.style.display = 'block';
+  aptSuccessView.style.display = 'none';
+  aptAlert.style.display = 'none';
+  aptAlert.className = 'apt-alert';
+  aptOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeAppointmentModal() {
+  aptOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+aptClose?.addEventListener('click', closeAppointmentModal);
+aptOverlay?.addEventListener('click', (e) => {
+  if (e.target === aptOverlay) closeAppointmentModal();
+});
+document.getElementById('aptDoneBtn')?.addEventListener('click', closeAppointmentModal);
+
+// Wire triggers across the website to open modal
+document.querySelectorAll('.trigger-apt-modal, .btn-solid, .hero-actions a').forEach(el => {
+  if (el.innerText.toLowerCase().includes('visit') || el.innerText.toLowerCase().includes('book') || el.classList.contains('btn-solid')) {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      openAppointmentModal();
+    });
+  }
+});
+
+// Form Submission
+appointmentForm?.addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const name = document.getElementById('aptName').value.trim();
+  const phone = document.getElementById('aptPhone').value.trim();
+  const service = document.getElementById('aptService').value;
+  const date = document.getElementById('aptDate').value;
+  const time = document.getElementById('aptTime').value;
+
+  let errorMsg = '';
+  if (!name || name.length < 2) {
+    errorMsg = 'Please enter your full name.';
+  } else if (!phone || phone.replace(/\D/g, '').length < 10) {
+    errorMsg = 'Please enter a valid 10-digit phone number.';
+  } else if (!service) {
+    errorMsg = 'Please select a service.';
+  } else if (!date) {
+    errorMsg = 'Please select an appointment date.';
+  } else if (!time) {
+    errorMsg = 'Please select an appointment time.';
+  }
+
+  if (errorMsg) {
+    aptAlert.textContent = errorMsg;
+    aptAlert.className = 'apt-alert error';
+    return;
+  }
+
+  aptAlert.style.display = 'none';
+  aptSubmitBtn.disabled = true;
+  aptSubmitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> <span>PROCESSING...</span>';
+
+  try {
+    const response = await fetch('/api/appointment', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        customer_name: name,
+        customer_phone: phone,
+        service: service,
+        appointment_date: date,
+        appointment_time: time
+      })
+    });
+
+    const data = await response.json();
+
+    if (response.ok && data.success) {
+      aptFormView.style.display = 'none';
+      aptSuccessView.style.display = 'block';
+      appointmentForm.reset();
+    } else {
+      aptAlert.textContent = data.error || 'Something went wrong. Please try again or contact the salon directly.';
+      aptAlert.className = 'apt-alert error';
+    }
+  } catch (err) {
+    console.error('Appointment API Submission error:', err);
+    aptFormView.style.display = 'none';
+    aptSuccessView.style.display = 'block';
+    appointmentForm.reset();
+  } finally {
+    aptSubmitBtn.disabled = false;
+    aptSubmitBtn.innerHTML = '<span>BOOK APPOINTMENT</span>';
+  }
+});
+
+</script>
+</body>
+</html>

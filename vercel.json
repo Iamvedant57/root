@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/appointment",
+      "destination": "/api/appointment.js"
+    }
+  ]
+}
