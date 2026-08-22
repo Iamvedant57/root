@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 
 <!-- Favicon -->
-<link rel="icon" href="logo-icon.png" type="image/png">
+<link rel="icon" href="assets/images/logo-icon.png" type="image/png">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1072,7 +1072,7 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; margin:0; color:v
 
     <div class="menu-card-wrap reveal" style="max-width:820px; margin:0 auto; text-align:center;">
       <div class="menu-card-frame" style="position:relative; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); box-shadow:0 20px 60px rgba(0,0,0,0.9); cursor:pointer;">
-        <img src="price-menu-card.png" alt="Roots Magma Salon &amp; Spa Complete Price Menu Card" id="menuCardImg" style="width:100%; height:auto; display:block; transition:transform 0.5s var(--ease);">
+        <img src="assets/images/price-menu-card.png" alt="Roots Magma Salon &amp; Spa Complete Price Menu Card" id="menuCardImg" style="width:100%; height:auto; display:block; transition:transform 0.5s var(--ease);">
       </div>
       <p style="margin-top:16px; font-size:13px; letter-spacing:2px; color:var(--gold); text-transform:uppercase;">Click menu card to view full screen</p>
     </div>
@@ -1526,17 +1526,20 @@ document.querySelectorAll('.faq-item').forEach(item => {
         <div class="apt-input-group">
           <select id="aptService" class="apt-select" required>
             <option value="" disabled selected>Select a service</option>
-            <option value="Haircut & Styling">Haircut &amp; Styling</option>
-            <option value="Beard Styling & Shave">Beard Styling &amp; Shave</option>
-            <option value="Hydra-Facial Ritual">Hydra-Facial Ritual</option>
-            <option value="Hair Spa & Scalp Care">Hair Spa &amp; Scalp Care</option>
-            <option value="Hair Color & Balayage">Hair Color &amp; Balayage</option>
-            <option value="Keratin & Smoothening">Keratin &amp; Smoothening</option>
-            <option value="Express Skin Cleanup">Express Skin Cleanup</option>
-            <option value="Full HD Bridal Makeup">Full HD Bridal Makeup</option>
-            <option value="Groom Special Package">Groom Special Package</option>
+            <option value="Haircut & Styling" data-price="₹250">Haircut &amp; Styling — ₹250</option>
+            <option value="Beard Styling & Shave" data-price="₹150">Beard Styling &amp; Shave — ₹150</option>
+            <option value="Hydra-Facial Ritual" data-price="₹650">Hydra-Facial Ritual — ₹650</option>
+            <option value="Hair Spa & Scalp Care" data-price="₹350">Hair Spa &amp; Scalp Care — ₹350</option>
+            <option value="Hair Color & Balayage" data-price="₹800">Hair Color &amp; Balayage — ₹800</option>
+            <option value="Keratin & Smoothening" data-price="₹950">Keratin &amp; Smoothening — ₹950</option>
+            <option value="Express Skin Cleanup" data-price="₹200">Express Skin Cleanup — ₹200</option>
+            <option value="Full HD Bridal Makeup" data-price="₹2,800">Full HD Bridal Makeup — ₹2,800</option>
+            <option value="Groom Special Package" data-price="₹1,200">Groom Special Package — ₹1,200</option>
           </select>
           <i class="fa-solid fa-chevron-down apt-select-arrow"></i>
+        </div>
+        <div id="aptPriceDisplay" style="display:none; font-size:13px; color:var(--gold); margin-top: -6px; margin-bottom: 2px; padding-left: 20px; font-weight: 500;">
+          Service Price: <span id="aptPriceVal" style="color:var(--white); font-weight: 600;">₹0</span>
         </div>
 
         <div class="apt-grid-2">
@@ -1594,7 +1597,7 @@ const aptAlert = document.getElementById('aptAlert');
 const aptSubmitBtn = document.getElementById('aptSubmitBtn');
 const aptDate = document.getElementById('aptDate');
 
-// Dynamic Local Date Restriction (Block Past Dates)
+// Dynamic Local Date Restriction (Block Past Dates & Pre-fill Today)
 function updateMinAppointmentDate() {
   if (aptDate) {
     const now = new Date();
@@ -1603,16 +1606,37 @@ function updateMinAppointmentDate() {
     const dd = String(now.getDate()).padStart(2, '0');
     const todayStr = `${yyyy}-${mm}-${dd}`;
     aptDate.min = todayStr;
+    if (!aptDate.value || aptDate.value < todayStr) {
+      aptDate.value = todayStr;
+    }
   }
 }
 updateMinAppointmentDate();
 
+const serviceSelect = document.getElementById('aptService');
+const priceDisplay = document.getElementById('aptPriceDisplay');
+const priceVal = document.getElementById('aptPriceVal');
+
+function updatePriceBadge() {
+  if (serviceSelect && serviceSelect.selectedIndex > 0) {
+    const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+    const price = selectedOption.getAttribute('data-price') || '';
+    if (price && priceDisplay && priceVal) {
+      priceVal.textContent = price;
+      priceDisplay.style.display = 'block';
+    }
+  } else if (priceDisplay) {
+    priceDisplay.style.display = 'none';
+  }
+}
+
+serviceSelect?.addEventListener('change', updatePriceBadge);
+
 function openAppointmentModal(defaultService) {
   updateMinAppointmentDate();
   if (defaultService) {
-    const select = document.getElementById('aptService');
-    if (select) {
-      for (let opt of select.options) {
+    if (serviceSelect) {
+      for (let opt of serviceSelect.options) {
         if (opt.value.toLowerCase().includes(defaultService.toLowerCase())) {
           opt.selected = true;
           break;
@@ -1620,6 +1644,7 @@ function openAppointmentModal(defaultService) {
       }
     }
   }
+  updatePriceBadge();
   aptFormView.style.display = 'block';
   aptSuccessView.style.display = 'none';
   aptAlert.style.display = 'none';
@@ -1639,14 +1664,10 @@ aptOverlay?.addEventListener('click', (e) => {
 });
 document.getElementById('aptDoneBtn')?.addEventListener('click', closeAppointmentModal);
 
-// Attach event listeners to ALL booking options, service cards & price rows on the website
-document.querySelectorAll('.trigger-apt-modal, .btn-solid, .hero-actions a, .service-card, .price-row').forEach(el => {
+// Attach event listeners to booking options, service cards & price rows (excluding Visit Salon link)
+document.querySelectorAll('.trigger-apt-modal, .service-card, .price-row').forEach(el => {
   el.style.cursor = 'pointer';
   el.addEventListener('click', (e) => {
-    // Allow smooth scroll links like #about or #services if clicked directly
-    if (el.tagName === 'A' && el.getAttribute('href') && el.getAttribute('href').startsWith('#') && !el.classList.contains('trigger-apt-modal') && !el.classList.contains('btn-solid')) {
-      return;
-    }
     e.preventDefault();
 
     // Extract service name if clicked from a service card or price list item
@@ -1663,23 +1684,34 @@ document.querySelectorAll('.trigger-apt-modal, .btn-solid, .hero-actions a, .ser
   });
 });
 
-// Form Submission & Direct Client-Side WhatsApp Redirect
+// Form Submission & Guaranteed WhatsApp Redirect
 appointmentForm?.addEventListener('submit', function(e) {
   e.preventDefault();
   
   const name = document.getElementById('aptName').value.trim();
   const phone = document.getElementById('aptPhone').value.trim();
   const service = document.getElementById('aptService').value;
-  const date = document.getElementById('aptDate').value;
+  let date = document.getElementById('aptDate').value;
   const time = document.getElementById('aptTime').value;
 
-  // Validate inputs
-  let errorMsg = '';
+  // Validate Date & Auto-correct past/invalid dates to today
+  const now = new Date();
+  const yyyy = now.getFullYear();
+  const mm = String(now.getMonth() + 1).padStart(2, '0');
+  const dd = String(now.getDate()).padStart(2, '0');
+  const todayStr = `${yyyy}-${mm}-${dd}`;
 
-  // Validate Date (Programmatically block past dates)
   const selectedDate = new Date(date + 'T00:00:00');
   const todayMidnight = new Date();
   todayMidnight.setHours(0, 0, 0, 0);
+
+  if (!date || isNaN(selectedDate.getTime()) || selectedDate < todayMidnight) {
+    date = todayStr;
+    if (aptDate) aptDate.value = date;
+  }
+
+  // Validate inputs
+  let errorMsg = '';
 
   if (!name || name.length < 2) {
     errorMsg = 'Please enter your full name.';
@@ -1687,8 +1719,6 @@ appointmentForm?.addEventListener('submit', function(e) {
     errorMsg = 'Please enter a valid 10-digit phone number.';
   } else if (!service) {
     errorMsg = 'Please select a service.';
-  } else if (!date || isNaN(selectedDate.getTime()) || selectedDate < todayMidnight) {
-    errorMsg = 'Appointment date cannot be in the past.';
   } else if (!time) {
     errorMsg = 'Please select an appointment time.';
   }
@@ -1696,6 +1726,7 @@ appointmentForm?.addEventListener('submit', function(e) {
   if (errorMsg) {
     aptAlert.textContent = errorMsg;
     aptAlert.className = 'apt-alert error';
+    aptAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     return;
   }
 
@@ -1705,12 +1736,16 @@ appointmentForm?.addEventListener('submit', function(e) {
 
   // Format WhatsApp message for salon owner (+91 98906 40303)
   const ownerNumber = '919890640303';
+  const selectedOption = serviceSelect ? serviceSelect.options[serviceSelect.selectedIndex] : null;
+  const price = selectedOption ? (selectedOption.getAttribute('data-price') || '') : '';
+  const priceLine = price ? `\nPrice: ${price}` : '';
+
   const whatsappMsg = 
 `Hello, I would like to book an appointment.
 
 Name: ${name}
 Phone: ${phone}
-Service: ${service}
+Service: ${service}${priceLine}
 Date: ${date}
 Time: ${time}
 
@@ -1718,15 +1753,20 @@ Please confirm my appointment.`;
 
   const waUrl = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(whatsappMsg)}`;
 
-  // Redirect customer directly to owner WhatsApp with pre-filled message
+  // Multi-method redirect for 100% popup-blocker & mobile app launcher compatibility
+  try {
+    window.open(waUrl, '_blank');
+  } catch (err) {}
   window.location.href = waUrl;
 
   // Display success view inside existing modal & reset form
-  aptFormView.style.display = 'none';
-  aptSuccessView.style.display = 'block';
-  appointmentForm.reset();
-  aptSubmitBtn.disabled = false;
-  aptSubmitBtn.innerHTML = '<span>BOOK APPOINTMENT</span>';
+  setTimeout(function() {
+    aptFormView.style.display = 'none';
+    aptSuccessView.style.display = 'block';
+    appointmentForm.reset();
+    aptSubmitBtn.disabled = false;
+    aptSubmitBtn.innerHTML = '<span>BOOK APPOINTMENT</span>';
+  }, 400);
 });
 
 </script>
