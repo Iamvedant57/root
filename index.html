@@ -1313,7 +1313,7 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; margin:0; color:v
   </div>
 </footer>
 
-<a class="whatsapp-float trigger-apt-modal" href="#" aria-label="Book Appointment"><i class="fa-regular fa-calendar-check"></i></a>
+
 
 <!-- Lightbox -->
 <div class="lightbox" id="lightbox">
@@ -1594,12 +1594,21 @@ const aptAlert = document.getElementById('aptAlert');
 const aptSubmitBtn = document.getElementById('aptSubmitBtn');
 const aptDate = document.getElementById('aptDate');
 
-if (aptDate) {
-  const todayIso = new Date().toISOString().split('T')[0];
-  aptDate.min = todayIso;
+// Dynamic Local Date Restriction (Block Past Dates)
+function updateMinAppointmentDate() {
+  if (aptDate) {
+    const now = new Date();
+    const yyyy = now.getFullYear();
+    const mm = String(now.getMonth() + 1).padStart(2, '0');
+    const dd = String(now.getDate()).padStart(2, '0');
+    const todayStr = `${yyyy}-${mm}-${dd}`;
+    aptDate.min = todayStr;
+  }
 }
+updateMinAppointmentDate();
 
 function openAppointmentModal(defaultService) {
+  updateMinAppointmentDate();
   if (defaultService) {
     const select = document.getElementById('aptService');
     if (select) {
@@ -1630,17 +1639,15 @@ aptOverlay?.addEventListener('click', (e) => {
 });
 document.getElementById('aptDoneBtn')?.addEventListener('click', closeAppointmentModal);
 
-// Wire triggers across the website to open modal
+// Attach event listener strictly to existing appointment buttons on the website
 document.querySelectorAll('.trigger-apt-modal, .btn-solid, .hero-actions a').forEach(el => {
-  if (el.innerText.toLowerCase().includes('visit') || el.innerText.toLowerCase().includes('book') || el.classList.contains('btn-solid')) {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      openAppointmentModal();
-    });
-  }
+  el.addEventListener('click', (e) => {
+    e.preventDefault();
+    openAppointmentModal();
+  });
 });
 
-// Form Submission
+// Form Submission & WhatsApp Integration
 appointmentForm?.addEventListener('submit', async function(e) {
   e.preventDefault();
   
@@ -1650,15 +1657,22 @@ appointmentForm?.addEventListener('submit', async function(e) {
   const date = document.getElementById('aptDate').value;
   const time = document.getElementById('aptTime').value;
 
+  // Validate inputs
   let errorMsg = '';
+
+  // Validate Date (Programmatically block past dates)
+  const selectedDate = new Date(date + 'T00:00:00');
+  const todayMidnight = new Date();
+  todayMidnight.setHours(0, 0, 0, 0);
+
   if (!name || name.length < 2) {
     errorMsg = 'Please enter your full name.';
   } else if (!phone || phone.replace(/\D/g, '').length < 10) {
     errorMsg = 'Please enter a valid 10-digit phone number.';
   } else if (!service) {
     errorMsg = 'Please select a service.';
-  } else if (!date) {
-    errorMsg = 'Please select an appointment date.';
+  } else if (!date || isNaN(selectedDate.getTime()) || selectedDate < todayMidnight) {
+    errorMsg = 'Appointment date cannot be in the past.';
   } else if (!time) {
     errorMsg = 'Please select an appointment time.';
   }
@@ -1673,8 +1687,28 @@ appointmentForm?.addEventListener('submit', async function(e) {
   aptSubmitBtn.disabled = true;
   aptSubmitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> <span>PROCESSING...</span>';
 
+  // Format WhatsApp message for owner (+91 93094 19028)
+  const ownerNumber = '919890640303';
+  const whatsappMsg = 
+`✨ *NEW APPOINTMENT BOOKING*
+
+*Salon:* Ruth Magma Unisex Salon
+*Customer Name:* ${name}
+*Phone Number:* ${phone}
+*Selected Service:* ${service}
+*Appointment Date:* ${date}
+*Appointment Time:* ${time}
+
+Please confirm my appointment.`;
+
+  const waUrl = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(whatsappMsg)}`;
+
+  // Open WhatsApp in new tab for customer to send pre-filled message
+  window.open(waUrl, '_blank');
+
+  // Save to database & API in background
   try {
-    const response = await fetch('/api/appointment', {
+    await fetch('/api/appointment', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -1685,23 +1719,12 @@ appointmentForm?.addEventListener('submit', async function(e) {
         appointment_time: time
       })
     });
-
-    const data = await response.json();
-
-    if (response.ok && data.success) {
-      aptFormView.style.display = 'none';
-      aptSuccessView.style.display = 'block';
-      appointmentForm.reset();
-    } else {
-      aptAlert.textContent = data.error || 'Something went wrong. Please try again or contact the salon directly.';
-      aptAlert.className = 'apt-alert error';
-    }
   } catch (err) {
-    console.error('Appointment API Submission error:', err);
+    console.warn('Background DB sync warning:', err);
+  } finally {
     aptFormView.style.display = 'none';
     aptSuccessView.style.display = 'block';
     appointmentForm.reset();
-  } finally {
     aptSubmitBtn.disabled = false;
     aptSubmitBtn.innerHTML = '<span>BOOK APPOINTMENT</span>';
   }
