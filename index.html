@@ -1639,16 +1639,32 @@ aptOverlay?.addEventListener('click', (e) => {
 });
 document.getElementById('aptDoneBtn')?.addEventListener('click', closeAppointmentModal);
 
-// Attach event listener strictly to existing appointment buttons on the website
-document.querySelectorAll('.trigger-apt-modal, .btn-solid, .hero-actions a').forEach(el => {
+// Attach event listeners to ALL booking options, service cards & price rows on the website
+document.querySelectorAll('.trigger-apt-modal, .btn-solid, .hero-actions a, .service-card, .price-row').forEach(el => {
+  el.style.cursor = 'pointer';
   el.addEventListener('click', (e) => {
+    // Allow smooth scroll links like #about or #services if clicked directly
+    if (el.tagName === 'A' && el.getAttribute('href') && el.getAttribute('href').startsWith('#') && !el.classList.contains('trigger-apt-modal') && !el.classList.contains('btn-solid')) {
+      return;
+    }
     e.preventDefault();
-    openAppointmentModal();
+
+    // Extract service name if clicked from a service card or price list item
+    let serviceName = '';
+    const h3 = el.querySelector('h3');
+    const nameEl = el.querySelector('.name');
+    if (h3) {
+      serviceName = h3.innerText.trim();
+    } else if (nameEl) {
+      serviceName = nameEl.childNodes[0]?.nodeValue?.trim() || nameEl.innerText.trim();
+    }
+
+    openAppointmentModal(serviceName);
   });
 });
 
-// Form Submission & WhatsApp Integration
-appointmentForm?.addEventListener('submit', async function(e) {
+// Form Submission & Direct Client-Side WhatsApp Redirect
+appointmentForm?.addEventListener('submit', function(e) {
   e.preventDefault();
   
   const name = document.getElementById('aptName').value.trim();
@@ -1685,49 +1701,32 @@ appointmentForm?.addEventListener('submit', async function(e) {
 
   aptAlert.style.display = 'none';
   aptSubmitBtn.disabled = true;
-  aptSubmitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> <span>PROCESSING...</span>';
+  aptSubmitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> <span>OPENING WHATSAPP...</span>';
 
-  // Format WhatsApp message for owner (+91 93094 19028)
+  // Format WhatsApp message for salon owner (+91 98906 40303)
   const ownerNumber = '919890640303';
   const whatsappMsg = 
-`✨ *NEW APPOINTMENT BOOKING*
+`Hello, I would like to book an appointment.
 
-*Salon:* Ruth Magma Unisex Salon
-*Customer Name:* ${name}
-*Phone Number:* ${phone}
-*Selected Service:* ${service}
-*Appointment Date:* ${date}
-*Appointment Time:* ${time}
+Name: ${name}
+Phone: ${phone}
+Service: ${service}
+Date: ${date}
+Time: ${time}
 
 Please confirm my appointment.`;
 
   const waUrl = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(whatsappMsg)}`;
 
-  // Open WhatsApp in new tab for customer to send pre-filled message
-  window.open(waUrl, '_blank');
+  // Redirect customer directly to owner WhatsApp with pre-filled message
+  window.location.href = waUrl;
 
-  // Save to database & API in background
-  try {
-    await fetch('/api/appointment', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        customer_name: name,
-        customer_phone: phone,
-        service: service,
-        appointment_date: date,
-        appointment_time: time
-      })
-    });
-  } catch (err) {
-    console.warn('Background DB sync warning:', err);
-  } finally {
-    aptFormView.style.display = 'none';
-    aptSuccessView.style.display = 'block';
-    appointmentForm.reset();
-    aptSubmitBtn.disabled = false;
-    aptSubmitBtn.innerHTML = '<span>BOOK APPOINTMENT</span>';
-  }
+  // Display success view inside existing modal & reset form
+  aptFormView.style.display = 'none';
+  aptSuccessView.style.display = 'block';
+  appointmentForm.reset();
+  aptSubmitBtn.disabled = false;
+  aptSubmitBtn.innerHTML = '<span>BOOK APPOINTMENT</span>';
 });
 
 </script>
