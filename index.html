@@ -321,7 +321,7 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; margin:0; color:v
 
 /* Emblem Badge in Hero */
 .seal{
-  position:absolute; right:6%; bottom:10%; width:195px; height:195px; z-index:2;
+  position:absolute; right:6%; bottom:2%; width:195px; height:195px; z-index:2;
   display:flex; align-items:center; justify-content:center; pointer-events:none;
 }
 .seal svg{
@@ -497,7 +497,7 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; margin:0; color:v
   .hero{ padding:130px 0 80px; text-align:left; }
   .hero-actions{ flex-direction:column; align-items:stretch; }
   .hero-actions .btn{ width:100%; }
-  .seal{ width:140px; height:140px; right:4%; bottom:6%; }
+  .seal{ width:130px; height:130px; right:4%; bottom:1%; opacity:0.75; }
 
   .about-grid{ grid-template-columns:1fr; gap:50px; }
   .about-media{ order:2; max-width:550px; margin:0 auto; width:100%; }
@@ -919,8 +919,8 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; margin:0; color:v
     <h1>The Art of Looking <em>Effortless</em></h1>
     <p>Roots Magma Unisex Salon blends 39+ years of heritage with modern luxury — precision haircuts, hydra-facials, hair spa rituals, balayage coloring, and bridal &amp; groom artistry at Next Level Mall, Camp Road.</p>
     <div class="hero-actions">
-      <a href="#contact" class="btn btn-solid"><i class="fa-solid fa-location-dot"></i> Visit Salon</a>
-      <a href="#" class="btn trigger-apt-modal"><i class="fa-regular fa-calendar-check"></i> Book Appointment</a>
+      <a href="#" class="btn btn-solid trigger-apt-modal"><i class="fa-regular fa-calendar-check"></i> Book Appointment</a>
+      <a href="#contact" class="btn"><i class="fa-solid fa-location-dot"></i> Visit Salon</a>
     </div>
   </div>
 
@@ -1535,11 +1535,15 @@ document.querySelectorAll('.faq-item').forEach(item => {
             <option value="Express Skin Cleanup" data-price="₹200">Express Skin Cleanup — ₹200</option>
             <option value="Full HD Bridal Makeup" data-price="₹2,800">Full HD Bridal Makeup — ₹2,800</option>
             <option value="Groom Special Package" data-price="₹1,200">Groom Special Package — ₹1,200</option>
+            <option value="Other" data-price="As per requirement">Other (Custom Request)</option>
           </select>
           <i class="fa-solid fa-chevron-down apt-select-arrow"></i>
         </div>
         <div id="aptPriceDisplay" style="display:none; font-size:13px; color:var(--gold); margin-top: -6px; margin-bottom: 2px; padding-left: 20px; font-weight: 500;">
           Service Price: <span id="aptPriceVal" style="color:var(--white); font-weight: 600;">₹0</span>
+        </div>
+        <div class="apt-input-group" id="aptCustomServiceGroup" style="display:none; margin-top: 10px;">
+          <input type="text" id="aptCustomService" class="apt-input" placeholder="Specify your custom service / requirement">
         </div>
 
         <div class="apt-grid-2">
@@ -1616,17 +1620,29 @@ updateMinAppointmentDate();
 const serviceSelect = document.getElementById('aptService');
 const priceDisplay = document.getElementById('aptPriceDisplay');
 const priceVal = document.getElementById('aptPriceVal');
+const customGroup = document.getElementById('aptCustomServiceGroup');
+const customInput = document.getElementById('aptCustomService');
 
 function updatePriceBadge() {
   if (serviceSelect && serviceSelect.selectedIndex > 0) {
     const selectedOption = serviceSelect.options[serviceSelect.selectedIndex];
+    const val = selectedOption.value;
     const price = selectedOption.getAttribute('data-price') || '';
+
+    if (val === 'Other') {
+      if (customGroup) customGroup.style.display = 'block';
+    } else {
+      if (customGroup) customGroup.style.display = 'none';
+      if (customInput) customInput.value = '';
+    }
+
     if (price && priceDisplay && priceVal) {
       priceVal.textContent = price;
       priceDisplay.style.display = 'block';
     }
-  } else if (priceDisplay) {
-    priceDisplay.style.display = 'none';
+  } else {
+    if (priceDisplay) priceDisplay.style.display = 'none';
+    if (customGroup) customGroup.style.display = 'none';
   }
 }
 
@@ -1713,6 +1729,19 @@ appointmentForm?.addEventListener('submit', function(e) {
   // Validate inputs
   let errorMsg = '';
 
+  let finalService = service;
+  if (service === 'Other') {
+    const customVal = customInput ? customInput.value.trim() : '';
+    if (!customVal) {
+      errorMsg = 'Please specify your custom service requirement.';
+      aptAlert.textContent = errorMsg;
+      aptAlert.className = 'apt-alert error';
+      aptAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      return;
+    }
+    finalService = `Other (${customVal})`;
+  }
+
   if (!name || name.length < 2) {
     errorMsg = 'Please enter your full name.';
   } else if (!phone || phone.replace(/\D/g, '').length < 10) {
@@ -1745,7 +1774,7 @@ appointmentForm?.addEventListener('submit', function(e) {
 
 Name: ${name}
 Phone: ${phone}
-Service: ${service}${priceLine}
+Service: ${finalService}${priceLine}
 Date: ${date}
 Time: ${time}
 
