@@ -859,7 +859,7 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; margin:0; color:v
 
 
 /* =========================================================
-   MULTI-SELECT SERVICES CONSOLE STYLES
+   MULTI-SELECT SERVICES CONSOLE & OWNER PRICE MODE STYLES
    ========================================================= */
 .apt-services-trigger {
   width: 100%;
@@ -890,7 +890,7 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; margin:0; color:v
   top: calc(100% + 6px);
   left: 0;
   width: 100%;
-  max-height: 280px;
+  max-height: 300px;
   background: rgba(18, 18, 20, 0.98);
   backdrop-filter: blur(20px);
   border: 1px solid rgba(198, 161, 91, 0.3);
@@ -906,7 +906,7 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; margin:0; color:v
 @keyframes dropdownFade { from { opacity:0; transform:translateY(-8px); } to { opacity:1; transform:translateY(0); } }
 
 .apt-services-scroll {
-  max-height: 280px;
+  max-height: 300px;
   overflow-y: auto;
   padding: 14px 16px;
 }
@@ -989,6 +989,26 @@ h1,h2,h3,h4{ font-family:var(--font-display); font-weight:600; margin:0; color:v
   font-size: 13px;
   font-weight: 600;
   margin-left: auto;
+}
+
+/* Owner Price Override Input */
+.apt-price-override {
+  display: none;
+  width: 76px;
+  height: 28px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--gold);
+  border-radius: 6px;
+  color: var(--gold-light);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 0 6px;
+  margin-left: 10px;
+  outline: none;
+}
+.apt-price-override:focus {
+  background: rgba(198, 161, 91, 0.2);
+  box-shadow: 0 0 8px rgba(198, 161, 91, 0.4);
 }
 
 </style>
@@ -1649,6 +1669,11 @@ document.querySelectorAll('.faq-item').forEach(item => {
       <div class="apt-alert" id="aptAlert"></div>
 
       <form class="apt-form" id="appointmentForm" novalidate>
+        <!-- Owner Price Mode Unlock Badge -->
+        <div id="aptOwnerBadge" style="display:none; padding:8px 14px; background:rgba(198,161,91,0.18); border:1px solid var(--gold); border-radius:12px; font-size:12px; color:var(--gold-light); margin-bottom:12px; text-align:center; font-weight:500;">
+          👑 <strong>Owner Mode Unlocked:</strong> You can edit prices for selected services.
+        </div>
+
         <div class="apt-input-group">
           <input type="text" id="aptName" class="apt-input" placeholder="Full name" required>
         </div>
@@ -1673,135 +1698,135 @@ document.querySelectorAll('.faq-item').forEach(item => {
               <!-- THREADING -->
               <div class="apt-cat-group">
                 <div class="apt-cat-header">🧵 THREADING</div>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Eyebrow" data-price="50"> <span>Eyebrow</span> <span class="apt-price-tag">₹50</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Upper Lip" data-price="30"> <span>Upper Lip</span> <span class="apt-price-tag">₹30</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Forehead" data-price="50"> <span>Forehead</span> <span class="apt-price-tag">₹50</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Chin" data-price="10"> <span>Chin</span> <span class="apt-price-tag">₹10</span></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Eyebrow" data-price="50"> <span>Eyebrow</span> <span class="apt-price-tag">₹50</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Upper Lip" data-price="30"> <span>Upper Lip</span> <span class="apt-price-tag">₹30</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Forehead" data-price="50"> <span>Forehead</span> <span class="apt-price-tag">₹50</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Chin" data-price="10"> <span>Chin</span> <span class="apt-price-tag">₹10</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
               </div>
 
               <!-- CLEAN UP -->
               <div class="apt-cat-group">
                 <div class="apt-cat-header">🧼 CLEAN UP</div>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Roots Cleanup" data-price="800"> <span>Roots</span> <span class="apt-price-tag">₹800</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Whitening Cleanup" data-price="1000"> <span>Whitening</span> <span class="apt-price-tag">₹1,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="O3 Plus Cleanup" data-price="1500"> <span>O3 Plus</span> <span class="apt-price-tag">₹1,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Code Skin Cleanup" data-price="1500"> <span>Code Skin</span> <span class="apt-price-tag">₹1,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="B10 (Raga) Cleanup" data-price="600"> <span>B10 (Raga)</span> <span class="apt-price-tag">₹600</span></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Roots Cleanup" data-price="800"> <span>Roots</span> <span class="apt-price-tag">₹800</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Whitening Cleanup" data-price="1000"> <span>Whitening</span> <span class="apt-price-tag">₹1,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="O3 Plus Cleanup" data-price="1500"> <span>O3 Plus</span> <span class="apt-price-tag">₹1,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Code Skin Cleanup" data-price="1500"> <span>Code Skin</span> <span class="apt-price-tag">₹1,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="B10 (Raga) Cleanup" data-price="600"> <span>B10 (Raga)</span> <span class="apt-price-tag">₹600</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
               </div>
 
               <!-- FACIAL -->
               <div class="apt-cat-group">
                 <div class="apt-cat-header">✨ FACIAL</div>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Code Skin 10 Years Facial" data-price="3000"> <span>Code Skin 10 Years</span> <span class="apt-price-tag">₹3,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Brightening Facial" data-price="3000"> <span>Brightening</span> <span class="apt-price-tag">₹3,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Korean Glass Skin Facial" data-price="4000"> <span>Korean Glass Skin</span> <span class="apt-price-tag">₹4,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Vita Peel Facial" data-price="3000"> <span>Vita Peel</span> <span class="apt-price-tag">₹3,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Harmony Zine Facial" data-price="2500"> <span>Harmony Zine</span> <span class="apt-price-tag">₹2,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Instant Clear Facial" data-price="5000"> <span>Instant Clear</span> <span class="apt-price-tag">₹5,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="O2 R2 Facial" data-price="3000"> <span>O2 R2</span> <span class="apt-price-tag">₹3,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Nutri Glow Facial" data-price="1500"> <span>Nutri Glow Facial</span> <span class="apt-price-tag">₹1,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="O3 Plus Facial" data-price="5000"> <span>O3 Plus Facial</span> <span class="apt-price-tag">₹5,000</span></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Code Skin 10 Years Facial" data-price="3000"> <span>Code Skin 10 Years</span> <span class="apt-price-tag">₹3,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Brightening Facial" data-price="3000"> <span>Brightening</span> <span class="apt-price-tag">₹3,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Korean Glass Skin Facial" data-price="4000"> <span>Korean Glass Skin</span> <span class="apt-price-tag">₹4,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Vita Peel Facial" data-price="3000"> <span>Vita Peel</span> <span class="apt-price-tag">₹3,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Harmony Zine Facial" data-price="2500"> <span>Harmony Zine</span> <span class="apt-price-tag">₹2,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Instant Clear Facial" data-price="5000"> <span>Instant Clear</span> <span class="apt-price-tag">₹5,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="O2 R2 Facial" data-price="3000"> <span>O2 R2</span> <span class="apt-price-tag">₹3,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Nutri Glow Facial" data-price="1500"> <span>Nutri Glow Facial</span> <span class="apt-price-tag">₹1,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="O3 Plus Facial" data-price="5000"> <span>O3 Plus Facial</span> <span class="apt-price-tag">₹5,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
               </div>
 
               <!-- WAXING -->
               <div class="apt-cat-group">
                 <div class="apt-cat-header">🍯 WAXING</div>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Underarm Normal Wax" data-price="1500"> <span>Underarm Normal</span> <span class="apt-price-tag">₹1,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Derto Tanning Rica Wax" data-price="2000"> <span>Derto Tanning Rica</span> <span class="apt-price-tag">₹2,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Full Hand Normal Wax" data-price="3000"> <span>Full Hand Normal</span> <span class="apt-price-tag">₹3,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Full Hand Rica Wax" data-price="600"> <span>Full Hand Rica</span> <span class="apt-price-tag">₹600</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Full Leg Rica Wax" data-price="600"> <span>Full Leg Rica</span> <span class="apt-price-tag">₹600</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Full Leg Rica Advanced" data-price="1200"> <span>Full Leg Rica Advanced</span> <span class="apt-price-tag">₹1,200</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Full Leg Normal Wax" data-price="800"> <span>Full Leg Normal</span> <span class="apt-price-tag">₹800</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Full Body Wax" data-price="3800"> <span>Full Body Wax</span> <span class="apt-price-tag">₹3,800</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Bikini Normal Wax" data-price="3800"> <span>Bikini Normal Wax</span> <span class="apt-price-tag">₹3,800</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Bikini Advanced Wax" data-price="1500"> <span>Bikini Advanced Wax</span> <span class="apt-price-tag">₹1,500</span></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Underarm Normal Wax" data-price="1500"> <span>Underarm Normal</span> <span class="apt-price-tag">₹1,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Derto Tanning Rica Wax" data-price="2000"> <span>Derto Tanning Rica</span> <span class="apt-price-tag">₹2,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Full Hand Normal Wax" data-price="3000"> <span>Full Hand Normal</span> <span class="apt-price-tag">₹3,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Full Hand Rica Wax" data-price="600"> <span>Full Hand Rica</span> <span class="apt-price-tag">₹600</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Full Leg Rica Wax" data-price="600"> <span>Full Leg Rica</span> <span class="apt-price-tag">₹600</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Full Leg Rica Advanced" data-price="1200"> <span>Full Leg Rica Advanced</span> <span class="apt-price-tag">₹1,200</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Full Leg Normal Wax" data-price="800"> <span>Full Leg Normal</span> <span class="apt-price-tag">₹800</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Full Body Wax" data-price="3800"> <span>Full Body Wax</span> <span class="apt-price-tag">₹3,800</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Bikini Normal Wax" data-price="3800"> <span>Bikini Normal Wax</span> <span class="apt-price-tag">₹3,800</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Bikini Advanced Wax" data-price="1500"> <span>Bikini Advanced Wax</span> <span class="apt-price-tag">₹1,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
               </div>
 
               <!-- BODY CARE -->
               <div class="apt-cat-group">
                 <div class="apt-cat-header">🧘 BODY CARE</div>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Body Massage" data-price="3500"> <span>Body Massage</span> <span class="apt-price-tag">₹3,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Body Polishing" data-price="5000"> <span>Body Polishing</span> <span class="apt-price-tag">₹5,000</span></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Body Massage" data-price="3500"> <span>Body Massage</span> <span class="apt-price-tag">₹3,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Body Polishing" data-price="5000"> <span>Body Polishing</span> <span class="apt-price-tag">₹5,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
               </div>
 
               <!-- MANICURE -->
               <div class="apt-cat-group">
                 <div class="apt-cat-header">💅 MANICURE</div>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Basic Manicure" data-price="800"> <span>Basic</span> <span class="apt-price-tag">₹800</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Advanced Manicure" data-price="1500"> <span>Advanced</span> <span class="apt-price-tag">₹1,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Australian Skin Lightening Manicure" data-price="1800"> <span>Australian Skin Lightening</span> <span class="apt-price-tag">₹1,800</span></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Basic Manicure" data-price="800"> <span>Basic</span> <span class="apt-price-tag">₹800</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Advanced Manicure" data-price="1500"> <span>Advanced</span> <span class="apt-price-tag">₹1,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Australian Skin Lightening Manicure" data-price="1800"> <span>Australian Skin Lightening</span> <span class="apt-price-tag">₹1,800</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
               </div>
 
               <!-- PEDICURE -->
               <div class="apt-cat-group">
                 <div class="apt-cat-header">🦶 PEDICURE</div>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Basic Pedicure" data-price="1000"> <span>Basic</span> <span class="apt-price-tag">₹1,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Advanced Pedicure" data-price="1800"> <span>Advanced</span> <span class="apt-price-tag">₹1,800</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Skin Lightening Pedicure" data-price="2000"> <span>Skin Lightening</span> <span class="apt-price-tag">₹2,000</span></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Basic Pedicure" data-price="1000"> <span>Basic</span> <span class="apt-price-tag">₹1,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Advanced Pedicure" data-price="1800"> <span>Advanced</span> <span class="apt-price-tag">₹1,800</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Skin Lightening Pedicure" data-price="2000"> <span>Skin Lightening</span> <span class="apt-price-tag">₹2,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
               </div>
 
               <!-- HAIR CARE -->
               <div class="apt-cat-group">
                 <div class="apt-cat-header">💇 HAIR CARE</div>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Hair Cut" data-price="500"> <span>Hair Cut</span> <span class="apt-price-tag">₹500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Hair Spa Basic" data-price="1500"> <span>Hair Spa Basic</span> <span class="apt-price-tag">₹1,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Hair Spa Treatment" data-price="2500"> <span>Hair Spa Treatment</span> <span class="apt-price-tag">₹2,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Mini Hair Spa" data-price="700"> <span>Mini Hair Spa</span> <span class="apt-price-tag">₹700</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Keratin Treatment" data-price="4000"> <span>Keratin Treatment</span> <span class="apt-price-tag">₹4,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Botox Protein Treatment" data-price="6000"> <span>Botox Protein Treatment</span> <span class="apt-price-tag">₹6,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="W1 Treatment" data-price="6500"> <span>W1 Treatment</span> <span class="apt-price-tag">₹6,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Nano Gel Treatment" data-price="6500"> <span>Nano Gel Treatment</span> <span class="apt-price-tag">₹6,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Dandruff Treatment" data-price="1500"> <span>Dandruff Treatment</span> <span class="apt-price-tag">₹1,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Oil Head Massage" data-price="600"> <span>Oil Head Massage</span> <span class="apt-price-tag">₹600</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Hair Ironing" data-price="600"> <span>Hair Ironing</span> <span class="apt-price-tag">₹600</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Hair Tong" data-price="600"> <span>Hair Tong</span> <span class="apt-price-tag">₹600</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Grooming" data-price="600"> <span>Grooming</span> <span class="apt-price-tag">₹600</span></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Hair Cut" data-price="500"> <span>Hair Cut</span> <span class="apt-price-tag">₹500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Hair Spa Basic" data-price="1500"> <span>Hair Spa Basic</span> <span class="apt-price-tag">₹1,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Hair Spa Treatment" data-price="2500"> <span>Hair Spa Treatment</span> <span class="apt-price-tag">₹2,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Mini Hair Spa" data-price="700"> <span>Mini Hair Spa</span> <span class="apt-price-tag">₹700</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Keratin Treatment" data-price="4000"> <span>Keratin Treatment</span> <span class="apt-price-tag">₹4,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Botox Protein Treatment" data-price="6000"> <span>Botox Protein Treatment</span> <span class="apt-price-tag">₹6,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="W1 Treatment" data-price="6500"> <span>W1 Treatment</span> <span class="apt-price-tag">₹6,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Nano Gel Treatment" data-price="6500"> <span>Nano Gel Treatment</span> <span class="apt-price-tag">₹6,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Dandruff Treatment" data-price="1500"> <span>Dandruff Treatment</span> <span class="apt-price-tag">₹1,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Oil Head Massage" data-price="600"> <span>Oil Head Massage</span> <span class="apt-price-tag">₹600</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Hair Ironing" data-price="600"> <span>Hair Ironing</span> <span class="apt-price-tag">₹600</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Hair Tong" data-price="600"> <span>Hair Tong</span> <span class="apt-price-tag">₹600</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Grooming" data-price="600"> <span>Grooming</span> <span class="apt-price-tag">₹600</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
               </div>
 
               <!-- HAIR COLOR -->
               <div class="apt-cat-group">
                 <div class="apt-cat-header">🎨 HAIR COLOR</div>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Root Touch Up" data-price="1000"> <span>Root Touch Up</span> <span class="apt-price-tag">₹1,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Global Hair Color" data-price="3500"> <span>Global Hair Color</span> <span class="apt-price-tag">₹3,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Highlighting Per Streak" data-price="350"> <span>Highlighting Per Streak</span> <span class="apt-price-tag">₹350</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Balayage Technique" data-price="7500"> <span>Balayage Technique</span> <span class="apt-price-tag">₹7,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Global Highlighting" data-price="4500"> <span>Global Highlighting</span> <span class="apt-price-tag">₹4,500</span></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Root Touch Up" data-price="1000"> <span>Root Touch Up</span> <span class="apt-price-tag">₹1,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Global Hair Color" data-price="3500"> <span>Global Hair Color</span> <span class="apt-price-tag">₹3,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Highlighting Per Streak" data-price="350"> <span>Highlighting Per Streak</span> <span class="apt-price-tag">₹350</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Balayage Technique" data-price="7500"> <span>Balayage Technique</span> <span class="apt-price-tag">₹7,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Global Highlighting" data-price="4500"> <span>Global Highlighting</span> <span class="apt-price-tag">₹4,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
               </div>
 
               <!-- HAIR — MALE -->
               <div class="apt-cat-group">
                 <div class="apt-cat-header">👨 HAIR — MALE</div>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Male Hair Cut" data-price="2000"> <span>Hair Cut (Male)</span> <span class="apt-price-tag">₹2,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Beard Shaving & Styling" data-price="1000"> <span>Beard</span> <span class="apt-price-tag">₹1,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Male Hair Spa Regular" data-price="800"> <span>Hair Spa Regular</span> <span class="apt-price-tag">₹800</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Male Head Massage" data-price="500"> <span>Head Massage</span> <span class="apt-price-tag">₹500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Male Hair Spa Treatment" data-price="1000"> <span>Hair Spa Treatment</span> <span class="apt-price-tag">₹1,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Hair Smoothing" data-price="1500"> <span>Smoothing</span> <span class="apt-price-tag">₹1,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Hair Straightening" data-price="2000"> <span>Straightening</span> <span class="apt-price-tag">₹2,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Male Protein Treatment" data-price="2500"> <span>Protein Treatment</span> <span class="apt-price-tag">₹2,500</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="B10 Male Treatment" data-price="600"> <span>B10</span> <span class="apt-price-tag">₹600</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Male Hair Set" data-price="300"> <span>Hair Set</span> <span class="apt-price-tag">₹300</span></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Male Hair Cut" data-price="2000"> <span>Hair Cut (Male)</span> <span class="apt-price-tag">₹2,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Beard Shaving & Styling" data-price="1000"> <span>Beard</span> <span class="apt-price-tag">₹1,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Male Hair Spa Regular" data-price="800"> <span>Hair Spa Regular</span> <span class="apt-price-tag">₹800</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Male Head Massage" data-price="500"> <span>Head Massage</span> <span class="apt-price-tag">₹500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Male Hair Spa Treatment" data-price="1000"> <span>Hair Spa Treatment</span> <span class="apt-price-tag">₹1,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Hair Smoothing" data-price="1500"> <span>Smoothing</span> <span class="apt-price-tag">₹1,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Hair Straightening" data-price="2000"> <span>Straightening</span> <span class="apt-price-tag">₹2,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Male Protein Treatment" data-price="2500"> <span>Protein Treatment</span> <span class="apt-price-tag">₹2,500</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="B10 Male Treatment" data-price="600"> <span>B10</span> <span class="apt-price-tag">₹600</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Male Hair Set" data-price="300"> <span>Hair Set</span> <span class="apt-price-tag">₹300</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
               </div>
 
               <!-- MAKEUP -->
               <div class="apt-cat-group">
                 <div class="apt-cat-header">💄 MAKEUP</div>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Sider Makeup" data-price="2000"> <span>Sider Makeup</span> <span class="apt-price-tag">₹2,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Only Saree Draping" data-price="600"> <span>Only Saree</span> <span class="apt-price-tag">₹600</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Only Hairstyle" data-price="600"> <span>Only Hairstyle</span> <span class="apt-price-tag">₹600</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Only Makeup" data-price="1000"> <span>Only Makeup</span> <span class="apt-price-tag">₹1,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Engagement Bride Makeup" data-price="8000"> <span>Engagement Bride</span> <span class="apt-price-tag">₹8,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Wedding Bride Makeup" data-price="6000"> <span>Wedding Bride</span> <span class="apt-price-tag">₹6,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Reception Bride Makeup" data-price="6000"> <span>Reception Bride</span> <span class="apt-price-tag">₹6,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Sangeet Bride Makeup" data-price="5000"> <span>Sangeet Bride</span> <span class="apt-price-tag">₹5,000</span></label>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Groom Makeup" data-price="4000"> <span>Groom Makeup</span> <span class="apt-price-tag">₹4,000</span></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Sider Makeup" data-price="2000"> <span>Sider Makeup</span> <span class="apt-price-tag">₹2,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Only Saree Draping" data-price="600"> <span>Only Saree</span> <span class="apt-price-tag">₹600</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Only Hairstyle" data-price="600"> <span>Only Hairstyle</span> <span class="apt-price-tag">₹600</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Only Makeup" data-price="1000"> <span>Only Makeup</span> <span class="apt-price-tag">₹1,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Engagement Bride Makeup" data-price="8000"> <span>Engagement Bride</span> <span class="apt-price-tag">₹8,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Wedding Bride Makeup" data-price="6000"> <span>Wedding Bride</span> <span class="apt-price-tag">₹6,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Reception Bride Makeup" data-price="6000"> <span>Reception Bride</span> <span class="apt-price-tag">₹6,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Sangeet Bride Makeup" data-price="5000"> <span>Sangeet Bride</span> <span class="apt-price-tag">₹5,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" data-name="Groom Makeup" data-price="4000"> <span>Groom Makeup</span> <span class="apt-price-tag">₹4,000</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
               </div>
 
               <!-- OTHER -->
               <div class="apt-cat-group">
                 <div class="apt-cat-header">✨ OTHER</div>
-                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" id="cbOther" data-name="Other (Custom Request)" data-price="0"> <span>Other / Custom Request</span> <span class="apt-price-tag">Custom</span></label>
+                <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" id="cbOther" data-name="Other (Custom Request)" data-price="0"> <span>Other / Custom Request</span> <span class="apt-price-tag">Custom</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
               </div>
             </div>
           </div>
@@ -1859,7 +1884,7 @@ document.querySelectorAll('.faq-item').forEach(item => {
 <script>
 
 /* =========================================================
-   APPOINTMENT MODAL INTERACTION & API SUBMISSION
+   APPOINTMENT MODAL INTERACTION & WHATSAPP REDIRECT
    ========================================================= */
 const aptOverlay = document.getElementById('aptOverlay');
 const aptClose = document.getElementById('aptClose');
@@ -1869,6 +1894,52 @@ const aptSuccessView = document.getElementById('aptSuccessView');
 const aptAlert = document.getElementById('aptAlert');
 const aptSubmitBtn = document.getElementById('aptSubmitBtn');
 const aptDate = document.getElementById('aptDate');
+const aptName = document.getElementById('aptName');
+const aptPhone = document.getElementById('aptPhone');
+
+const servicesTrigger = document.getElementById('aptServicesTrigger');
+const servicesDropdown = document.getElementById('aptServicesDropdown');
+const servicesSummary = document.getElementById('aptServicesSummary');
+const serviceSearch = document.getElementById('aptServiceSearch');
+const checkboxes = document.querySelectorAll('.apt-service-cb');
+const priceDisplay = document.getElementById('aptPriceDisplay');
+const priceVal = document.getElementById('aptPriceVal');
+const selectedCount = document.getElementById('aptSelectedCount');
+const customGroup = document.getElementById('aptCustomServiceGroup');
+const customInput = document.getElementById('aptCustomService');
+const cbOther = document.getElementById('cbOther');
+const ownerBadge = document.getElementById('aptOwnerBadge');
+
+// Check if Owner Mode is active (Name is 'vedant' or Phone contains '5109')
+function checkOwnerMode() {
+  const nameVal = (aptName?.value || '').toLowerCase().trim();
+  const phoneVal = (aptPhone?.value || '').replace(/\D/g, '');
+  const isOwner = (nameVal === 'vedant' || phoneVal.includes('5109'));
+
+  if (ownerBadge) {
+    ownerBadge.style.display = isOwner ? 'block' : 'none';
+  }
+
+  // Toggle price override inputs in service items
+  document.querySelectorAll('.apt-service-item').forEach(item => {
+    const overrideInput = item.querySelector('.apt-price-override');
+    const priceTag = item.querySelector('.apt-price-tag');
+    if (overrideInput) {
+      if (isOwner) {
+        overrideInput.style.display = 'inline-block';
+        if (priceTag) priceTag.style.display = 'none';
+      } else {
+        overrideInput.style.display = 'none';
+        if (priceTag) priceTag.style.display = 'inline-block';
+      }
+    }
+  });
+
+  return isOwner;
+}
+
+aptName?.addEventListener('input', () => { checkOwnerMode(); updateSelectedServices(); });
+aptPhone?.addEventListener('input', () => { checkOwnerMode(); updateSelectedServices(); });
 
 // Dynamic Local Date Restriction (Block Past Dates & Pre-fill Today)
 function updateMinAppointmentDate() {
@@ -1885,18 +1956,6 @@ function updateMinAppointmentDate() {
   }
 }
 updateMinAppointmentDate();
-
-const servicesTrigger = document.getElementById('aptServicesTrigger');
-const servicesDropdown = document.getElementById('aptServicesDropdown');
-const servicesSummary = document.getElementById('aptServicesSummary');
-const serviceSearch = document.getElementById('aptServiceSearch');
-const checkboxes = document.querySelectorAll('.apt-service-cb');
-const priceDisplay = document.getElementById('aptPriceDisplay');
-const priceVal = document.getElementById('aptPriceVal');
-const selectedCount = document.getElementById('aptSelectedCount');
-const customGroup = document.getElementById('aptCustomServiceGroup');
-const customInput = document.getElementById('aptCustomService');
-const cbOther = document.getElementById('cbOther');
 
 // Toggle dropdown visibility
 servicesTrigger?.addEventListener('click', function(e) {
@@ -1922,8 +1981,9 @@ serviceSearch?.addEventListener('input', function() {
   });
 });
 
-// Update Multi-Selection & Total Calculation
+// Update Multi-Selection & Total Calculation (with Owner Custom Price support)
 function updateSelectedServices() {
+  const isOwner = checkOwnerMode();
   const selected = [];
   let totalPrice = 0;
   let hasOther = false;
@@ -1931,8 +1991,20 @@ function updateSelectedServices() {
   checkboxes.forEach(cb => {
     if (cb.checked) {
       const name = cb.getAttribute('data-name');
-      const price = parseInt(cb.getAttribute('data-price') || '0', 10);
-      selected.push({ name, price });
+      const itemEl = cb.closest('.apt-service-item');
+      const overrideInput = itemEl ? itemEl.querySelector('.apt-price-override') : null;
+      let price = parseInt(cb.getAttribute('data-price') || '0', 10);
+      let isCustomPrice = false;
+
+      if (isOwner && overrideInput && overrideInput.value.trim() !== '') {
+        const parsedOverride = parseInt(overrideInput.value.trim(), 10);
+        if (!isNaN(parsedOverride) && parsedOverride >= 0) {
+          price = parsedOverride;
+          isCustomPrice = true;
+        }
+      }
+
+      selected.push({ name, price, isCustomPrice });
       totalPrice += price;
       if (cb.id === 'cbOther') hasOther = true;
     }
@@ -1962,11 +2034,15 @@ function updateSelectedServices() {
     if (priceVal) priceVal.textContent = totalPrice > 0 ? `₹${totalPrice.toLocaleString('en-IN')}` : 'As per requirement';
   }
 
-  return { selected, totalPrice, hasOther };
+  return { selected, totalPrice, hasOther, isOwner };
 }
 
 checkboxes.forEach(cb => {
   cb.addEventListener('change', updateSelectedServices);
+});
+
+document.querySelectorAll('.apt-price-override').forEach(input => {
+  input.addEventListener('input', updateSelectedServices);
 });
 
 function openAppointmentModal(defaultService) {
@@ -2013,7 +2089,6 @@ document.querySelectorAll('.trigger-apt-modal, .service-card, .price-row').forEa
   el.addEventListener('click', (e) => {
     e.preventDefault();
 
-    // Extract service name if clicked from a service card or price list item
     let serviceName = '';
     const h3 = el.querySelector('h3');
     const nameEl = el.querySelector('.name');
@@ -2033,9 +2108,24 @@ appointmentForm?.addEventListener('submit', function(e) {
   
   const name = document.getElementById('aptName').value.trim();
   const phone = document.getElementById('aptPhone').value.trim();
-  const service = document.getElementById('aptService').value;
   let date = document.getElementById('aptDate').value;
   const time = document.getElementById('aptTime').value;
+
+  // Retrieve multi-selected services data & owner mode
+  const { selected, totalPrice, hasOther, isOwner } = updateSelectedServices();
+
+  // Validate Custom Request if checked
+  let customVal = '';
+  if (hasOther) {
+    customVal = customInput ? customInput.value.trim() : '';
+    if (!customVal && selected.length === 1) {
+      let errorMsg = 'Please specify your custom service requirement.';
+      aptAlert.textContent = errorMsg;
+      aptAlert.className = 'apt-alert error';
+      aptAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      return;
+    }
+  }
 
   // Validate Date & Auto-correct past/invalid dates to today
   const now = new Date();
@@ -2053,28 +2143,15 @@ appointmentForm?.addEventListener('submit', function(e) {
     if (aptDate) aptDate.value = date;
   }
 
-  // Validate inputs
+  // Validate required fields
   let errorMsg = '';
-
-  let finalService = service;
-  if (service === 'Other') {
-    const customVal = customInput ? customInput.value.trim() : '';
-    if (!customVal) {
-      errorMsg = 'Please specify your custom service requirement.';
-      aptAlert.textContent = errorMsg;
-      aptAlert.className = 'apt-alert error';
-      aptAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      return;
-    }
-    finalService = `Other (${customVal})`;
-  }
 
   if (!name || name.length < 2) {
     errorMsg = 'Please enter your full name.';
   } else if (!phone || phone.replace(/\D/g, '').length < 10) {
     errorMsg = 'Please enter a valid 10-digit phone number.';
-  } else if (!service) {
-    errorMsg = 'Please select a service.';
+  } else if (selected.length === 0) {
+    errorMsg = 'Please select at least one service.';
   } else if (!time) {
     errorMsg = 'Please select an appointment time.';
   }
@@ -2090,18 +2167,32 @@ appointmentForm?.addEventListener('submit', function(e) {
   aptSubmitBtn.disabled = true;
   aptSubmitBtn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> <span>OPENING WHATSAPP...</span>';
 
+  // Format Multi-Service list for WhatsApp message
+  let serviceListStr = '';
+  selected.forEach(item => {
+    if (item.name.includes('Other') && customVal) {
+      serviceListStr += `\n• Other: ${customVal}`;
+    } else {
+      const pStr = item.price > 0 ? ` — ₹${item.price.toLocaleString('en-IN')}` : '';
+      const customTag = item.isCustomPrice ? ' (Custom Price)' : '';
+      serviceListStr += `\n• ${item.name}${pStr}${customTag}`;
+    }
+  });
+
+  const totalStr = totalPrice > 0 ? `₹${totalPrice.toLocaleString('en-IN')}` : 'As per requirement';
+  const ownerTag = isOwner ? ' [Owner Custom Booking]' : '';
+
   // Format WhatsApp message for salon owner (+91 98906 40303)
   const ownerNumber = '919890640303';
-  const selectedOption = serviceSelect ? serviceSelect.options[serviceSelect.selectedIndex] : null;
-  const price = selectedOption ? (selectedOption.getAttribute('data-price') || '') : '';
-  const priceLine = price ? `\nPrice: ${price}` : '';
-
   const whatsappMsg = 
-`Hello, I would like to book an appointment.
+`Hello, I would like to book an appointment.${ownerTag}
 
 Name: ${name}
 Phone: ${phone}
-Service: ${finalService}${priceLine}
+
+Services Selected:${serviceListStr}
+
+Total Estimated Price: ${totalStr}
 Date: ${date}
 Time: ${time}
 
