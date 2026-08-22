@@ -1828,6 +1828,14 @@ document.querySelectorAll('.faq-item').forEach(item => {
                 <div class="apt-cat-header">✨ OTHER</div>
                 <label class="apt-service-item"><input type="checkbox" class="apt-service-cb" id="cbOther" data-name="Other (Custom Request)" data-price="0"> <span>Other / Custom Request</span> <span class="apt-price-tag">Custom</span> <input type="number" class="apt-price-override" placeholder="Custom ₹"></label>
               </div>
+
+              <!-- OWNER SAVE PRICES BUTTON -->
+              <div id="aptSavePricesGroup" style="display:none; padding:10px 4px 6px; text-align:center; border-top:1px dashed rgba(198,161,91,0.3); margin-top:8px;">
+                <button type="button" id="aptSavePricesBtn" style="width:100%; height:38px; background:linear-gradient(135deg, var(--gold), var(--gold-light)); color:var(--black); border:none; border-radius:19px; font-family:var(--font-body); font-size:12.5px; font-weight:700; letter-spacing:1px; cursor:pointer; display:flex; align-items:center; justify-content:center; gap:8px; box-shadow:0 4px 15px rgba(198,161,91,0.3); transition:all 0.3s var(--ease);">
+                  <i class="fa-solid fa-floppy-disk"></i> <span>SAVE PRICE CHANGES</span>
+                </button>
+                <div id="aptSaveStatus" style="display:none; font-size:11.5px; color:#4ade80; margin-top:6px; font-weight:500;">✓ Price changes saved to website!</div>
+              </div>
             </div>
           </div>
         </div>
@@ -1911,6 +1919,36 @@ const cbOther = document.getElementById('cbOther');
 const ownerBadge = document.getElementById('aptOwnerBadge');
 
 // Check if Owner Mode is active (Name is 'vedant' or Phone contains '5109')
+const savePricesGroup = document.getElementById('aptSavePricesGroup');
+const savePricesBtn = document.getElementById('aptSavePricesBtn');
+const saveStatus = document.getElementById('aptSaveStatus');
+
+// Load persistent saved prices from localStorage
+function loadSavedPrices() {
+  try {
+    const saved = localStorage.getItem('ruth_magma_custom_prices');
+    if (saved) {
+      const priceMap = JSON.parse(saved);
+      document.querySelectorAll('.apt-service-cb').forEach(cb => {
+        const name = cb.getAttribute('data-name');
+        if (name && priceMap[name] !== undefined) {
+          const newPrice = priceMap[name];
+          cb.setAttribute('data-price', newPrice);
+          const itemEl = cb.closest('.apt-service-item');
+          if (itemEl) {
+            const priceTag = itemEl.querySelector('.apt-price-tag');
+            const overrideInput = itemEl.querySelector('.apt-price-override');
+            if (priceTag) priceTag.textContent = newPrice > 0 ? `₹${newPrice.toLocaleString('en-IN')}` : (name.includes('Other') ? 'Custom' : '₹0');
+            if (overrideInput && !overrideInput.value) overrideInput.value = newPrice;
+          }
+        }
+      });
+    }
+  } catch (err) {}
+}
+loadSavedPrices();
+
+// Check if Owner Mode is active (Name is 'vedant' or Phone contains '5109')
 function checkOwnerMode() {
   const nameVal = (aptName?.value || '').toLowerCase().trim();
   const phoneVal = (aptPhone?.value || '').replace(/\D/g, '');
@@ -1918,6 +1956,9 @@ function checkOwnerMode() {
 
   if (ownerBadge) {
     ownerBadge.style.display = isOwner ? 'block' : 'none';
+  }
+  if (savePricesGroup) {
+    savePricesGroup.style.display = isOwner ? 'block' : 'none';
   }
 
   // Toggle price override inputs in service items
@@ -1937,6 +1978,37 @@ function checkOwnerMode() {
 
   return isOwner;
 }
+
+// Save Custom Price Changes Permanently
+savePricesBtn?.addEventListener('click', function() {
+  const priceMap = {};
+  document.querySelectorAll('.apt-service-cb').forEach(cb => {
+    const name = cb.getAttribute('data-name');
+    const itemEl = cb.closest('.apt-service-item');
+    const overrideInput = itemEl ? itemEl.querySelector('.apt-price-override') : null;
+    const priceTag = itemEl ? itemEl.querySelector('.apt-price-tag') : null;
+
+    if (overrideInput && overrideInput.value.trim() !== '') {
+      const parsed = parseInt(overrideInput.value.trim(), 10);
+      if (!isNaN(parsed) && parsed >= 0) {
+        cb.setAttribute('data-price', parsed);
+        priceMap[name] = parsed;
+        if (priceTag) priceTag.textContent = parsed > 0 ? `₹${parsed.toLocaleString('en-IN')}` : (name.includes('Other') ? 'Custom' : '₹0');
+      }
+    }
+  });
+
+  try {
+    localStorage.setItem('ruth_magma_custom_prices', JSON.stringify(priceMap));
+  } catch (err) {}
+
+  if (saveStatus) {
+    saveStatus.style.display = 'block';
+    setTimeout(() => { saveStatus.style.display = 'none'; }, 3500);
+  }
+
+  updateSelectedServices();
+});
 
 aptName?.addEventListener('input', () => { checkOwnerMode(); updateSelectedServices(); });
 aptPhone?.addEventListener('input', () => { checkOwnerMode(); updateSelectedServices(); });
