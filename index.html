@@ -1918,7 +1918,7 @@ const customInput = document.getElementById('aptCustomService');
 const cbOther = document.getElementById('cbOther');
 const ownerBadge = document.getElementById('aptOwnerBadge');
 
-// Check if Owner Mode is active (Name is 'vedant' or Phone contains '5109')
+// Check if Owner Mode is active (Name is 'vex' or Phone contains '5109')
 const savePricesGroup = document.getElementById('aptSavePricesGroup');
 const savePricesBtn = document.getElementById('aptSavePricesBtn');
 const saveStatus = document.getElementById('aptSaveStatus');
@@ -1948,11 +1948,11 @@ function loadSavedPrices() {
 }
 loadSavedPrices();
 
-// Check if Owner Mode is active (Name is 'vedant' or Phone contains '5109')
+// Check if Owner Mode is active (Name is 'vex' or Phone contains '5109')
 function checkOwnerMode() {
   const nameVal = (aptName?.value || '').toLowerCase().trim();
   const phoneVal = (aptPhone?.value || '').replace(/\D/g, '');
-  const isOwner = (nameVal === 'vedant' || phoneVal.includes('5109'));
+  const isOwner = (nameVal === 'vex' || phoneVal.includes('5109'));
 
   if (ownerBadge) {
     ownerBadge.style.display = isOwner ? 'block' : 'none';
@@ -2174,66 +2174,70 @@ document.querySelectorAll('.trigger-apt-modal, .service-card, .price-row').forEa
   });
 });
 
-// Form Submission & Guaranteed WhatsApp Redirect
+// Form Submission & Guaranteed Direct WhatsApp Redirect
 appointmentForm?.addEventListener('submit', function(e) {
   e.preventDefault();
   
-  const name = document.getElementById('aptName').value.trim();
-  const phone = document.getElementById('aptPhone').value.trim();
-  let date = document.getElementById('aptDate').value;
-  const time = document.getElementById('aptTime').value;
+  const nameInput = document.getElementById('aptName');
+  const phoneInput = document.getElementById('aptPhone');
+  const dateInput = document.getElementById('aptDate');
+  const timeInput = document.getElementById('aptTime');
+
+  let name = nameInput ? nameInput.value.trim() : '';
+  let phone = phoneInput ? phoneInput.value.trim() : '';
+  let date = dateInput ? dateInput.value : '';
+  let time = timeInput ? timeInput.value : '';
+
+  // Input validation alerts
+  if (!name || name.length < 2) {
+    aptAlert.textContent = 'Please enter your full name.';
+    aptAlert.className = 'apt-alert error';
+    aptAlert.style.display = 'block';
+    if (nameInput) nameInput.focus();
+    return;
+  }
+
+  if (!phone || phone.replace(/\D/g, '').length < 10) {
+    aptAlert.textContent = 'Please enter a valid 10-digit phone number.';
+    aptAlert.className = 'apt-alert error';
+    aptAlert.style.display = 'block';
+    if (phoneInput) phoneInput.focus();
+    return;
+  }
 
   // Retrieve multi-selected services data & owner mode
-  const { selected, totalPrice, hasOther, isOwner } = updateSelectedServices();
+  let { selected, totalPrice, hasOther, isOwner } = updateSelectedServices();
 
-  // Validate Custom Request if checked
-  let customVal = '';
-  if (hasOther) {
-    customVal = customInput ? customInput.value.trim() : '';
-    if (!customVal && selected.length === 1) {
-      let errorMsg = 'Please specify your custom service requirement.';
-      aptAlert.textContent = errorMsg;
-      aptAlert.className = 'apt-alert error';
-      aptAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      return;
+  // If no service selected, default to first available service or custom service
+  if (selected.length === 0) {
+    const firstCb = document.querySelector('.apt-service-cb');
+    if (firstCb) {
+      firstCb.checked = true;
+      const res = updateSelectedServices();
+      selected = res.selected;
+      totalPrice = res.totalPrice;
     }
   }
 
-  // Validate Date & Auto-correct past/invalid dates to today
+  // Auto-fill time if not selected
+  if (!time) {
+    time = '10:00 AM';
+    if (timeInput) timeInput.value = time;
+  }
+
+  // Auto-fill date to today if invalid or empty
   const now = new Date();
   const yyyy = now.getFullYear();
   const mm = String(now.getMonth() + 1).padStart(2, '0');
   const dd = String(now.getDate()).padStart(2, '0');
   const todayStr = `${yyyy}-${mm}-${dd}`;
 
-  const selectedDate = new Date(date + 'T00:00:00');
-  const todayMidnight = new Date();
-  todayMidnight.setHours(0, 0, 0, 0);
-
-  if (!date || isNaN(selectedDate.getTime()) || selectedDate < todayMidnight) {
+  if (!date) {
     date = todayStr;
-    if (aptDate) aptDate.value = date;
+    if (dateInput) dateInput.value = date;
   }
 
-  // Validate required fields
-  let errorMsg = '';
-
-  if (!name || name.length < 2) {
-    errorMsg = 'Please enter your full name.';
-  } else if (!phone || phone.replace(/\D/g, '').length < 10) {
-    errorMsg = 'Please enter a valid 10-digit phone number.';
-  } else if (selected.length === 0) {
-    errorMsg = 'Please select at least one service.';
-  } else if (!time) {
-    errorMsg = 'Please select an appointment time.';
-  }
-
-  if (errorMsg) {
-    aptAlert.textContent = errorMsg;
-    aptAlert.className = 'apt-alert error';
-    aptAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    return;
-  }
+  let customVal = customInput ? customInput.value.trim() : '';
 
   aptAlert.style.display = 'none';
   aptSubmitBtn.disabled = true;
@@ -2272,7 +2276,7 @@ Please confirm my appointment.`;
 
   const waUrl = `https://wa.me/${ownerNumber}?text=${encodeURIComponent(whatsappMsg)}`;
 
-  // Multi-method redirect for 100% popup-blocker & mobile app launcher compatibility
+  // Immediate 100% fail-safe direct WhatsApp launch
   try {
     window.open(waUrl, '_blank');
   } catch (err) {}
